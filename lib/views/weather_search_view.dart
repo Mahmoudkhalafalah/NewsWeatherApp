@@ -8,28 +8,41 @@ class Search_View_Page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-            'Search a city' ,
+          'Search for Places',
          style: TextStyle(
            color: Colors.white,
          ),
         ),
+        backgroundColor: Colors.black,
+        leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 25,
+            )),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter a city',
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Center(
+          child: TextField (
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 32,
               ),
+              labelText: 'Search',
+              suffixIcon: const Icon(Icons.search),
+              hintText: 'Enter city name',
+              border: OutlineInputBorder (
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Colors.black,
+                )
+              )
             ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: (){},
-              child: const Text('Search'),
-            ),
-          ],
-        ),
+          ),
+        )
       ),
     );
   }
