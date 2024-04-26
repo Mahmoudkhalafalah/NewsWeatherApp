@@ -55,3 +55,36 @@ class CustomContainer extends StatelessWidget {
     );
   }
 }
+
+class CustomSmallContainer extends StatelessWidget {
+  const CustomSmallContainer(
+      {super.key,
+      required this.label,
+      required this.icon,
+      required this.value});
+  final String label;
+  final IconData icon;
+  final String value;
+  @override
+  Widget build(BuildContext context) {
+    return CustomContainer(
+        child: Column(
+      children: [
+        Row(mainAxisSize: MainAxisSize.max,
+          children: [
+            Icon(icon, color: Colors.grey.shade500),
+            SizedBox(width: 8,),
+            Text(
+              label,
+              style: TextStyle(color: Colors.grey.shade500),
+            )
+          ],
+        ),
+        Text(
+          value,
+          style: TextStyle(fontSize: 16,color: Colors.white),
+        )
+      ],
+    ));
+  }
+}
