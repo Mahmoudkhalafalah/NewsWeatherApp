@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_weather_app_project/views/widgets.dart';
 
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({super.key});
@@ -72,183 +72,83 @@ class WeatherDetails extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Color(0xff2d3253).withOpacity(0.4),
-                ),
-                padding: EdgeInsets.all(16),
+              CustomContainer(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Monday',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '7%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '30° 31°',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-
+                    CustomForecastDayWidget(
+                      day: 'Manday',
+                      humidity: 70,
+                      icon: Icons.cloud,
+                      maxTemp: 37,
+                      minTemp: 30,
+                    )
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                height: 8,
+              ),
+
             ],
           ),
         ),
@@ -256,3 +156,5 @@ class WeatherDetails extends StatelessWidget {
     );
   }
 }
+
+
