@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 import 'package:news_weather_app_project/models/weather_forecast_model.dart';
 
 import '../models/weather_model.dart';
@@ -50,5 +51,17 @@ class WeatherService {
     }
   }
 }
-
+String getDayName(String dateString) {
+  DateTime date = DateFormat('yyyy-MM-dd').parse(dateString);
+  List<String> days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  return days[date.weekday - 1];
+}
 
