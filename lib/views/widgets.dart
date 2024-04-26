@@ -66,25 +66,34 @@ class CustomSmallContainer extends StatelessWidget {
   final IconData icon;
   final String value;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    double width = MediaQuery.of(context).size.width;
     return CustomContainer(
-        child: Column(
-      children: [
-        Row(mainAxisSize: MainAxisSize.max,
-          children: [
-            Icon(icon, color: Colors.grey.shade500),
-            SizedBox(width: 8,),
-            Text(
-              label,
-              style: TextStyle(color: Colors.grey.shade500),
-            )
-          ],
-        ),
-        Text(
-          value,
-          style: TextStyle(fontSize: 16,color: Colors.white),
-        )
-      ],
-    ));
+        child: SizedBox(
+          width: 3*width/8,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+          Row(mainAxisSize: MainAxisSize.max,
+            children: [
+              Icon(icon, color: Colors.grey.shade500,size: 16,),
+              SizedBox(width: 8,),
+              Text(
+                label,
+                style: TextStyle(color: Colors.grey.shade500),
+              )
+            ],
+          ),
+          SizedBox(height: 8,),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+            child: Text(
+              value,
+              style: TextStyle(fontSize: 16,color: Colors.white),
+            ),
+          )
+                ],
+              ),
+        ));
   }
 }
