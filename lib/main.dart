@@ -1,125 +1,284 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
+import 'package:news_weather_app_project/views/login.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Weather App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:LoginScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class HomePage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomePageState extends State{
+ int _selectedIndex = 0; // Index for the Weather tab
+  bool _isHomeTabActive = true; // Track if the home tab is active
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  String _cityName = '';
+  double _currentTemp = 0.0;
+  String _weatherState = '';
+  List<Map<String, dynamic>> _newsList = [];
+
+  Future<void> _fetchWeatherData(String cityName) async {
+    // Weather API call
+    final apiKey = '2f8decbf816447469f8142742242404';
+    final url = 'http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$cityName';
+    
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      setState(() {
+        _currentTemp = json['current']['temp_c'];
+        _weatherState = json['current']['condition']['text'];
+      });
+    } else {
+      throw Exception('Failed to load weather data');
+    }
+  }
+
+  Future<void> _fetchNewsData() async {
+    // News API call
+    final newsApiKey = '81d2ace827fb44d6ace2c413133dbd6b';
+    final newsUrl =
+        'https://newsapi.org/v2/top-headlines?country=us&apiKey=65f19bd8ca6648969aaccc58c8765471';
+    
+    final response = await http.get(Uri.parse(newsUrl));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> articles = jsonDecode(response.body)['articles'];
+      setState(() {
+        _newsList = articles.cast<Map<String, dynamic>>();
+      });
+    } else {
+      throw Exception('Failed to load news data');
+    }
   }
 
   @override
+  void initState() {
+    super.initState();
+    _getLocationAndWeather();
+    _fetchNewsData();
+  }
+
+  Future<void> _getLocationAndWeather() async {
+    try {
+      // Check if permission is granted
+      if (await Permission.location.isGranted) {
+        // Permission is already granted, proceed to get location
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.low);
+        List       <Placemark> placemarks = await placemarkFromCoordinates(
+            position.latitude, position.longitude);
+        setState(() {
+          _cityName = placemarks[0].locality ?? 'Unknown';
+        });
+        await _fetchWeatherData(_cityName);
+      } else {
+        // Permission is not granted, request permission
+        var status = await Permission.location.request();
+        if (status.isGranted) {
+          // Permission granted, proceed to get location
+          _getLocationAndWeather();
+        } else {
+          // Permission denied, handle accordingly
+          print('Location permission denied');
+        }
+      }
+    } catch (e) {
+      print('Error getting location: $e');
+    }
+  }
+void _handleTabPressed(int index) {
+  if (index == 0) {
+    setState(() {
+      _isHomeTabActive = true; // Activate the home tab
+    });
+  } else if (index == 1) {
+  // Navigate to BlankPage when weather icon is pressed
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => BlankPage(returnCallback: _returnFromBlankPage)),
+  );
+}
+else {
+    // Navigate to BlankPage for other tabs
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BlankPage(returnCallback: _returnFromBlankPage,)),
+    );
+  }
+}
+void _returnFromBlankPage() {
+  // Set home tab as active when returning from BlankPage
+  setState(() {
+    _isHomeTabActive = true;
+    _selectedIndex = 0; // Set the selected index to 0 (home icon)
+  });
+}
+@override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Center(
+          child: Text(
+            'Weather App',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        elevation: 8, // Add elevation for material design effect
+        backgroundColor: Color.fromRGBO(98, 126, 117, 1), // Set background color
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+               Color.fromRGBO(98, 126, 117, 1)
+               ,Color.fromRGBO(98, 126, 117, 0.8)
+              
+              ],
+            ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'City: $_cityName',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Current Temperature: $_currentTemp°C',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Weather State: $_weatherState',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'News',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 400, // Adjust the height of the list view
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: _newsList.map((article) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      elevation: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (article['urlToImage'] != null)
+                            Image.network(
+                              article['urlToImage'],
+                              width: double.infinity,
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ListTile(
+                            title: Text(
+                              article['title'] ?? '',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            subtitle: Text(article['description'] ?? ''),
+                            onTap: () {
+                              // Open article URL
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+        
+      ),
+      bottomNavigationBar: ConvexAppBar(
+        items: [
+          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Icons.cloud, title: 'Weather'),
+          TabItem(icon: Icons.new_releases, title: 'News'),
+          TabItem(icon: Icons.person, title: 'Sign'),
+        ],
+                backgroundColor: Color.fromRGBO(98, 126, 117, 1), // Set bottom bar color
+
+      initialActiveIndex: _selectedIndex,
+        onTap: _handleTabPressed,
+      ),
+    );
+  }
+}
+class BlankPage extends StatelessWidget {
+  final Function returnCallback;
+
+  BlankPage({required this.returnCallback});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Blank Page'),
+        backgroundColor: Color.fromRGBO(98, 126, 117, 1), // Set app bar color
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+          children: [
+            Text('This is a blank page.'),
+            ElevatedButton(
+              onPressed: () {
+                // Return to previous page and call the returnCallback
+                Navigator.pop(context);
+                returnCallback();
+              },
+              child: Text('Return to Home'),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
