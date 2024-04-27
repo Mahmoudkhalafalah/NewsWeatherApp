@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 
-import '../models/weather_model.dart';
-
 class WeatherDetails extends StatefulWidget {
-  const WeatherDetails({super.key});
+  const WeatherDetails({Key? key});
 
   @override
   State<WeatherDetails> createState() => _WeatherDetailsState();
@@ -19,6 +19,8 @@ class _WeatherDetailsState extends State<WeatherDetails> {
 
   @override
   Widget build(BuildContext context) {
+
+    var weathermodel = BlocProvider.of<GetWeatherCubit>(context).weathermodel;
     double width = MediaQuery.of(context).size.width;
     return Container(
       decoration: const BoxDecoration(
@@ -68,7 +70,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          weathermodel?.cityName ?? "cairo",
+                          'cairo',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 64,
@@ -99,13 +101,10 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Icon(
-                        Icons.cloud,
-                        size: 80,
-                        color: Colors.white,
-                      ),
+                    Icon(
+                      Icons.cloud,
+                      size: 80,
+                      color: Colors.white,
                     )
                   ],
                 ),
@@ -375,5 +374,3 @@ class _WeatherDetailsState extends State<WeatherDetails> {
     );
   }
 }
-
-WeatherModel? weathermodel;
