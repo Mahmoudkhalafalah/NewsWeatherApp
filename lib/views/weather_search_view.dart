@@ -5,9 +5,9 @@ import 'package:news_weather_app_project/services/weather_serivce.dart';
 import 'package:news_weather_app_project/views/weather_details_view.dart';
 
 import '../models/weather_model.dart';
-class Search_View_Page extends StatelessWidget {
-  const Search_View_Page ({Key? key}) : super(key: key);
-
+class SearchView extends StatelessWidget {
+  SearchView ({super.key, this.updateUI});
+  VoidCallback? updateUI;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +43,7 @@ class Search_View_Page extends StatelessWidget {
                weathermodel = await WeatherService(Dio())
                   .getWeatherData(cityName: value);
 
-               Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context){
-                     return const WeatherDetails();
-                   },
-                   )
-               );
+               Navigator.pop(context);
                },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(

@@ -68,9 +68,8 @@ class CustomSmallContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     double width = MediaQuery.of(context).size.width;
-    return CustomContainer(
-        child: SizedBox(
-          width: 3*width/8.5,
+    return Expanded(
+      child: CustomContainer(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -93,7 +92,7 @@ class CustomSmallContainer extends StatelessWidget {
             ),
           )
                 ],
-              ),
-        ));
+              )),
+    );
   }
 }

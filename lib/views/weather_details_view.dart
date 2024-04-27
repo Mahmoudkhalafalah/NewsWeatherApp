@@ -1,11 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 
 import '../models/weather_model.dart';
 
-class WeatherDetails extends StatelessWidget {
+class WeatherDetails extends StatefulWidget {
   const WeatherDetails({super.key});
+
+  @override
+  State<WeatherDetails> createState() => _WeatherDetailsState();
+}
+
+class _WeatherDetailsState extends State<WeatherDetails> {
+  void updateUI() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +41,17 @@ class WeatherDetails extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context){
-                    return const Search_View_Page();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return SearchView(
+                      updateUI: updateUI,
+                    );
                   },
-                  )
-                );
+                ));
               },
-              icon: const Icon(Icons.search
-                ,color: Colors.white,
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
               ),
             ),
           ],
@@ -50,157 +62,164 @@ class WeatherDetails extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${weathermodel?.cityName}',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 64,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          weathermodel?.cityName ?? "cairo",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 64,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          'cloud',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Text(
+                          '33° / 18° feels like 20°',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 32),
+                      child: Icon(
+                        Icons.cloud,
+                        size: 80,
                         color: Colors.white,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'cloud',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '33° / 18° feels like 20°',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
+                    )
                   ],
                 ),
                 SizedBox(
                   height: 8,
                 ),
-                SizedBox(
-                  width: width,
-                  child: CustomContainer(
-                    child: Column(
-                      children: [
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          icon: Icons.cloud,
-                          maxTemp: 37,
-                          minTemp: 30,
-                        )
-                      ],
-                    ),
+                CustomContainer(
+                  child: Column(
+                    children: [
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomForecastDayWidget(
+                        day: 'Manday',
+                        humidity: 70,
+                        icon: Icons.cloud,
+                        maxTemp: 37,
+                        minTemp: 30,
+                      )
+                    ],
                   ),
                 ),
                 SizedBox(
                   height: 8,
                 ),
-                SizedBox(
-                  width: 400,
-                  child: CustomContainer(
-                      child: Column(
-                    children: [
-                      Text(
-                        'AQI',
-                        style: TextStyle(fontSize: 32, color: Colors.white),
-                      ),
-                      Text(
-                        'High',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      SizedBox(
-                        width: 3 * width / 5,
-                        child: LinearProgressIndicator(
-                          value: 0.3,
-                          color: Colors.green,
-                          backgroundColor: Color(0xffB0AEAE),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          minHeight: 10,
-                        ),
-                      )
-                    ],
-                  )),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomContainer(
+                          child: Column(
+                        children: [
+                          Text(
+                            'AQI',
+                            style: TextStyle(fontSize: 32, color: Colors.white),
+                          ),
+                          Text(
+                            'High',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          SizedBox(
+                            width: 0.6 * width,
+                            child: LinearProgressIndicator(
+                              value: 0.3,
+                              color: Colors.green,
+                              backgroundColor: Color(0xffB0AEAE),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              minHeight: 10,
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 8,
@@ -213,6 +232,9 @@ class WeatherDetails extends StatelessWidget {
                         label: 'UV Index',
                         icon: Icons.light_mode,
                         value: 'LOW'),
+                    SizedBox(
+                      width: 8,
+                    ),
                     CustomSmallContainer(
                         label: 'UV Index', icon: Icons.light_mode, value: 'LOW')
                   ],
@@ -228,6 +250,9 @@ class WeatherDetails extends StatelessWidget {
                         label: 'UV Index',
                         icon: Icons.light_mode,
                         value: 'LOW'),
+                    SizedBox(
+                      width: 8,
+                    ),
                     CustomSmallContainer(
                         label: 'UV Index', icon: Icons.light_mode, value: 'LOW')
                   ],
@@ -243,6 +268,9 @@ class WeatherDetails extends StatelessWidget {
                         label: 'UV Index',
                         icon: Icons.light_mode,
                         value: 'LOW'),
+                    SizedBox(
+                      width: 8,
+                    ),
                     CustomSmallContainer(
                         label: 'UV Index', icon: Icons.light_mode, value: 'LOW')
                   ],
@@ -347,6 +375,5 @@ class WeatherDetails extends StatelessWidget {
     );
   }
 }
-
 
 WeatherModel? weathermodel;
