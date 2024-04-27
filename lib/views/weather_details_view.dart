@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
+
+import '../models/weather_model.dart';
 
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({super.key});
@@ -27,8 +30,17 @@ class WeatherDetails extends StatelessWidget {
           backgroundColor: Colors.transparent,
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search,color: Colors.white,),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context){
+                    return const Search_View_Page();
+                  },
+                  )
+                );
+              },
+              icon: const Icon(Icons.search
+                ,color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -40,7 +52,7 @@ class WeatherDetails extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '20°',
+                      '${weathermodel?.cityName}',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 64,
@@ -335,3 +347,6 @@ class WeatherDetails extends StatelessWidget {
     );
   }
 }
+
+
+WeatherModel? weathermodel;

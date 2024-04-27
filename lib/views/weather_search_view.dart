@@ -1,5 +1,10 @@
+import 'dart:math';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:news_weather_app_project/services/weather_serivce.dart';
+import 'package:news_weather_app_project/views/weather_details_view.dart';
 
+import '../models/weather_model.dart';
 class Search_View_Page extends StatelessWidget {
   const Search_View_Page ({Key? key}) : super(key: key);
 
@@ -15,17 +20,36 @@ class Search_View_Page extends StatelessWidget {
         ),
         backgroundColor: Colors.black,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context){
+                    return const WeatherDetails();
+                  },
+                  )
+              );
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
               size: 25,
-            )),
+            ) ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
           child: TextField (
+            onSubmitted: (value) async {
+
+               weathermodel = await WeatherService(Dio())
+                  .getWeatherData(cityName: value);
+
+               Navigator.of(context).push(
+                   MaterialPageRoute(builder: (context){
+                     return const WeatherDetails();
+                   },
+                   )
+               );
+               },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
@@ -47,3 +71,4 @@ class Search_View_Page extends StatelessWidget {
     );
   }
 }
+

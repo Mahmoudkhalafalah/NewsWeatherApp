@@ -70,7 +70,7 @@ class CustomSmallContainer extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return CustomContainer(
         child: SizedBox(
-          width: 3*width/8,
+          width: 3*width/8.5,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
