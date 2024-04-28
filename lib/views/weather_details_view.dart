@@ -20,7 +20,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
   @override
   Widget build(BuildContext context) {
 
-    var weathermodel = BlocProvider.of<GetWeatherCubit>(context).weathermodel;
+    var weatherModel = BlocProvider.of<GetWeatherCubit>(context).weatherModel;
     double width = MediaQuery.of(context).size.width;
     return Container(
       decoration: const BoxDecoration(

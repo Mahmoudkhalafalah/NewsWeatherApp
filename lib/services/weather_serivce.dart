@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:news_weather_app_project/models/weather_forecast_model.dart';
+import 'package:news_weather_app_project/services/location_service.dart';
 
 import '../models/weather_model.dart';
 
@@ -29,6 +31,13 @@ class WeatherService {
       log(e.toString());
       throw Exception('Error, Try Later');
     }
+  }
+
+  Future<WeatherModel> getWeatherDataWithLocation() async {
+
+    String cityName = await LocationService().getCityName();
+    return getWeatherData(cityName: cityName);
+
   }
 
   Future<List<WeatherForecastModel>> getForecastWeatherData(

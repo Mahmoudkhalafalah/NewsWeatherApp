@@ -12,23 +12,29 @@ import 'package:news_weather_app_project/views/weather_details_view.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 void main() {
-  runApp(const WeatherApp());
+  runApp(MaterialApp(
+    home: Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          WeatherModel weatherModel = await WeatherService(Dio()).getWeatherDataWithLocation();
+          log(weatherModel.cityName);
+        },
+      ),
+    ),
+  ));
 }
 
 class WeatherApp extends StatelessWidget {
-  const WeatherApp ({Key? key})  : super(key : key) ;
+  const WeatherApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GetWeatherCubit(),
       child: MaterialApp(
-          home: ControlView(),
+        home: ControlView(),
       ),
     );
   }
 }
-
-
