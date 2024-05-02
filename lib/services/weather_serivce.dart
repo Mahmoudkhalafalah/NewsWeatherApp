@@ -40,6 +40,12 @@ class WeatherService {
 
   }
 
+  Future<List<WeatherForecastModel>> getForecastWeatherDataWithLocation() async {
+
+    String cityName = await LocationService().getCityName();
+    return getForecastWeatherData(cityName: cityName);
+
+  }
   Future<List<WeatherForecastModel>> getForecastWeatherData(
       {required String cityName}) async {
     try {
@@ -60,17 +66,5 @@ class WeatherService {
     }
   }
 }
-String getDayName(String dateString) {
-  DateTime date = DateFormat('yyyy-MM-dd').parse(dateString);
-  List<String> days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-  ];
-  return days[date.weekday - 1];
-}
+
 

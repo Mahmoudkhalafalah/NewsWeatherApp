@@ -1,38 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomForecastDayWidget extends StatelessWidget {
   const CustomForecastDayWidget({
     super.key,
     required this.day,
     required this.humidity,
-    required this.icon,
+    required this.srcImage,
     required this.maxTemp,
     required this.minTemp,
   });
-  final String day;
-  final int humidity;
-  final IconData icon;
-  final double maxTemp;
-  final double minTemp;
+  final String? day;
+  final int? humidity;
+  final String? srcImage;
+  final double? maxTemp;
+  final double? minTemp;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          day,
+          day??"N/A",
           style: TextStyle(color: Colors.white),
         ),
         Text(
           '$humidity%',
-          style: TextStyle(color: Colors.white),
+         style: TextStyle(color: Colors.white),
         ),
-        Icon(
-          icon,
-          color: Colors.white,
-        ),
+        Image.network('https:$srcImage'??"",cacheHeight: 50,cacheWidth: 50,),
         Text(
-          '${minTemp.toInt()}° ${maxTemp.toInt()}°',
+          '${minTemp?.toInt()}° ${maxTemp?.toInt()}°',
           style: TextStyle(color: Colors.white),
         ),
       ],
@@ -95,4 +93,17 @@ class CustomSmallContainer extends StatelessWidget {
               )),
     );
   }
+}
+String getDayName(String dateString) {
+  DateTime date = DateFormat('yyyy-MM-dd').parse(dateString);
+  List<String> days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  return days[date.weekday - 1];
 }

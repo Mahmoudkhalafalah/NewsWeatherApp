@@ -7,7 +7,7 @@ import 'package:news_weather_app_project/views/weather_details_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/weather_model.dart';
 
-
+/*
 class SearchView extends StatelessWidget {
   SearchView ({super.key, this.updateUI});
   VoidCallback? updateUI;
@@ -73,3 +73,4 @@ class SearchView extends StatelessWidget {
   }
 }
 
+*/
