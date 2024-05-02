@@ -6,7 +6,6 @@ import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_cu
 import 'package:news_weather_app_project/services/weather_serivce.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
-
 import '../models/weather_forecast_model.dart';
 import '../models/weather_model.dart';
 
@@ -44,6 +43,7 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
 
   @override
   Widget build(BuildContext context) {
+
     double width = MediaQuery.of(context).size.width;
     if (weatherDataList == null || weatherModel == null) {
       return Scaffold(

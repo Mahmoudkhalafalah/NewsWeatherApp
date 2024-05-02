@@ -4,7 +4,10 @@ import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_cu
 import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_states.dart';
 import 'package:news_weather_app_project/views/weather_details_view.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
-/*
+
+import 'Weather_home_default_view.dart';
+
+
 class ControlView extends StatelessWidget {
   ControlView ({super.key});
 
@@ -14,7 +17,7 @@ class ControlView extends StatelessWidget {
       body: BlocBuilder<GetWeatherCubit , WeatherState> (
         builder: (context , state) {
           if (state is InitialWeatherState){
-            return  SearchView();
+            return  WeatherHomeDetails();
           } else if (state is WeatherLoadedState )
             {
               return  WeatherDetails();
@@ -27,5 +30,5 @@ class ControlView extends StatelessWidget {
     );
   }
 }
- */
+
 

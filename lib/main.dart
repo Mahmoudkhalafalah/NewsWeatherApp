@@ -16,12 +16,12 @@ import 'package:news_weather_app_project/views/widgets.dart';
 
 void main() {
 
-  runApp(MaterialApp(
-    home: WeatherHomeDetails()
+  runApp( MaterialApp(
+    home: WeatherApp()
       ),
   );
 }
-/*
+
 class WeatherApp extends StatelessWidget {
   const WeatherApp({Key? key}) : super(key: key);
 
@@ -35,4 +35,3 @@ class WeatherApp extends StatelessWidget {
     );
   }
 }
-*/

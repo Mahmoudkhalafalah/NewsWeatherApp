@@ -7,12 +7,12 @@ import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_st
 class GetWeatherCubit extends Cubit<WeatherState> {
   GetWeatherCubit() : super(InitialWeatherState());
 
-  late WeatherModel weatherModel;
+  late WeatherModel weatherModell;
   getWeather ({ required String cityName }) async {
     try {
-      weatherModel = await WeatherService(Dio())
+      WeatherModel weatherModell = await WeatherService(Dio())
           .getWeatherData(cityName: cityName);
-      emit(WeatherLoadedState(weatherModel));
+      emit(WeatherLoadedState(weatherModell));
     } catch(e){
       emit(WeatherFailureState(
           e.toString()
