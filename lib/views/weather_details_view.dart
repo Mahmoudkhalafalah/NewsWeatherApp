@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_cubit.dart';
+import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 
-/*class WeatherDetails extends StatefulWidget {
+class WeatherDetails extends StatefulWidget {
   const WeatherDetails({Key? key});
 
   @override
@@ -20,7 +21,6 @@ class _WeatherDetailsState extends State<WeatherDetails> {
   @override
   Widget build(BuildContext context) {
 
-    var weatherModel = BlocProvider.of<GetWeatherCubit>(context).weatherModel;
     double width = MediaQuery.of(context).size.width;
     return Container(
       decoration: const BoxDecoration(
@@ -39,6 +39,19 @@ class _WeatherDetailsState extends State<WeatherDetails> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return WeatherHomeDetails();
+                },
+              ));
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
           backgroundColor: Colors.transparent,
           actions: [
             IconButton(
@@ -117,7 +130,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       ),
@@ -127,7 +140,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       ),
@@ -137,7 +150,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       ),
@@ -147,7 +160,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       ),
@@ -157,7 +170,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       ),
@@ -167,7 +180,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       ),
@@ -177,7 +190,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       CustomForecastDayWidget(
                         day: 'Manday',
                         humidity: 70,
-                        icon: Icons.cloud,
+                        srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
                         maxTemp: 37,
                         minTemp: 30,
                       )
@@ -374,4 +387,3 @@ class _WeatherDetailsState extends State<WeatherDetails> {
     );
   }
 }
-*/

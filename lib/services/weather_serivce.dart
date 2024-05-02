@@ -16,7 +16,7 @@ class WeatherService {
       List<WeatherForecastModel>.filled(
           7,
           WeatherForecastModel(
-              date: "date", humidity: 1, maxTemp: 1, minTemp: 1));
+              date: "date", humidity: 1, maxTemp: 1, minTemp: 1,icon: ""));
   WeatherService(this.dio);
   Future<WeatherModel> getWeatherData({required String cityName}) async {
     try {

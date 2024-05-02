@@ -8,16 +8,16 @@ import 'package:news_weather_app_project/models/weather_forecast_model.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
 import 'package:news_weather_app_project/services/weather_serivce.dart';
 import 'package:news_weather_app_project/views/Weather_conrtol_view.dart';
+import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/weather_details_view.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 
 void main() {
+
   runApp(MaterialApp(
-    home: Scaffold(
-      body: Center(child: CustomForecastDayWidget(day: "monday", humidity: 70, srcImage: "https://cdn.weatherapi.com/weather/64x64/night/113.png", maxTemp: 10, minTemp: 10)),
-    )
+    home: WeatherHomeDetails()
       ),
   );
 }

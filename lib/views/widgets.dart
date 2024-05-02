@@ -21,14 +21,18 @@ class CustomForecastDayWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          day??"N/A",
+          day ?? "N/A",
           style: TextStyle(color: Colors.white),
         ),
         Text(
           '$humidity%',
-         style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
         ),
-        Image.network('https:$srcImage'??"",cacheHeight: 50,cacheWidth: 50,),
+        Image.network(
+          'https:$srcImage' ?? "",
+          cacheHeight: 30,
+          cacheWidth: 30,
+        ),
         Text(
           '${minTemp?.toInt()}° ${maxTemp?.toInt()}°',
           style: TextStyle(color: Colors.white),
@@ -64,46 +68,55 @@ class CustomSmallContainer extends StatelessWidget {
   final IconData icon;
   final String value;
   @override
-  Widget build(BuildContext context){
-    double width = MediaQuery.of(context).size.width;
+  Widget build(BuildContext context) {
     return Expanded(
       child: CustomContainer(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-          Row(mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
-              Icon(icon, color: Colors.grey.shade500,size: 16,),
-              SizedBox(width: 8,),
+              Icon(
+                icon,
+                color: Colors.grey.shade500,
+                size: 16,
+              ),
+              SizedBox(
+                width: 8,
+              ),
               Text(
                 label,
                 style: TextStyle(color: Colors.grey.shade500),
               )
             ],
           ),
-          SizedBox(height: 8,),
+          SizedBox(
+            height: 8,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
             child: Text(
               value,
-              style: TextStyle(fontSize: 16,color: Colors.white),
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           )
-                ],
-              )),
+        ],
+      )),
     );
   }
 }
+
 String getDayName(String dateString) {
   DateTime date = DateFormat('yyyy-MM-dd').parse(dateString);
   List<String> days = [
-    'Monday',
-    'Tuesday',
+    'Monday   ',
+    'Tuesday  ',
     'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
+    'Thursday ',
+    'Friday   ',
+    'Saturday ',
+    'Sunday   '
   ];
   return days[date.weekday - 1];
 }

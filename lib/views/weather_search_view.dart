@@ -7,7 +7,7 @@ import 'package:news_weather_app_project/views/weather_details_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/weather_model.dart';
 
-/*
+
 class SearchView extends StatelessWidget {
   SearchView ({super.key, this.updateUI});
   VoidCallback? updateUI;
@@ -24,12 +24,7 @@ class SearchView extends StatelessWidget {
         backgroundColor: Colors.black,
         leading: IconButton(
             onPressed: () {
-          /*    Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context){
-                    Navigator.pop(context);
-                  },
-                  )
-              ); */
+          Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -41,10 +36,7 @@ class SearchView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
           child: TextField (
-            onSubmitted: (value) async {
-              var getWeatherCubit = BlocProvider.of<GetWeatherCubit>(context);
-              getWeatherCubit.getWeather(cityName: value);
-
+            onSubmitted: (value) {
               Navigator.push(context,
                   MaterialPageRoute(
                       builder: (context) => const WeatherDetails()
@@ -72,5 +64,3 @@ class SearchView extends StatelessWidget {
     );
   }
 }
-
-*/

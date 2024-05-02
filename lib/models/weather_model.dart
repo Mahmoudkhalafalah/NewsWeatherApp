@@ -19,6 +19,7 @@ class WeatherModel {
   final double? visibility;
   final double? airQuality;
   final double? uvIndex;
+  final double? dewPoint;
   final int? windDegree;
   final int? cloud;
   final int? humidity;
@@ -53,6 +54,7 @@ class WeatherModel {
     this.sunSet,
     this.moonSet,
     this.moonPhase,
+    this.dewPoint,
   });
 
   factory WeatherModel.fromJson(json) {
@@ -85,6 +87,7 @@ class WeatherModel {
       sunSet: json['forecast']['forecastday'][0]['astro']['sunset'],
       airQuality: json['forecast']['forecastday'][0]['day']['air_quality']
           ['pm2_5'],
+      dewPoint: json['forecast']['forecastday'][0]['hour'][0]['dewpoint_c'],
     );
   }
 
