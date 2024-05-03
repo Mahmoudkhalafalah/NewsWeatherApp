@@ -20,22 +20,28 @@ class CustomForecastDayWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          day ?? "N/A",
-          style: TextStyle(color: Colors.white),
+        SizedBox(
+          width: 80,
+          child: Text(
+            day ?? "N/A",
+            style: const TextStyle(color: Colors.white),
+          ),
         ),
         Text(
           '$humidity%',
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         Image.network(
           'https:$srcImage' ?? "",
           cacheHeight: 30,
           cacheWidth: 30,
         ),
-        Text(
-          '${minTemp?.toInt()}° ${maxTemp?.toInt()}°',
-          style: TextStyle(color: Colors.white),
+        SizedBox(
+          width: 48,
+          child: Text(
+            '${minTemp?.toInt()}° ${maxTemp?.toInt()}°',
+            style: const TextStyle(color: Colors.white),
+          ),
         ),
       ],
     );
@@ -50,10 +56,10 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Color(0xff2d3253).withOpacity(0.4),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        color: const Color(0xff2d3253).withOpacity(0.4),
       ),
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: child,
     );
   }
@@ -84,7 +90,7 @@ class CustomSmallContainer extends StatelessWidget {
                 color: Colors.grey.shade500,
                 size: 16,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Text(
@@ -93,14 +99,14 @@ class CustomSmallContainer extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
             child: Text(
               value,
-              style: TextStyle(fontSize: 16, color: Colors.white),
+              style: const TextStyle(fontSize: 16, color: Colors.white),
             ),
           )
         ],
@@ -122,4 +128,50 @@ String getDayName(String dateString) {
     'Sunday   '
   ];
   return days[date.weekday - 1];
+}
+List getAirQuality(double value) {
+  String quality = '';
+  Color color = Colors.green;
+  if (value < 50) {
+    quality = 'Good';
+    color = Colors.green;
+  } else if (value < 100) {
+    quality = 'Moderate';
+    color = Colors.yellow;
+  } else if (value < 150) {
+    quality = 'Semi Unhealthy';
+    color = Colors.orange;
+  } else if (value < 200) {
+    quality = 'Unhealthy';
+    color = Colors.red;
+  } else if (value < 300) {
+    quality = 'Very Unhealthy';
+    color = const Color(0xFF772F28);
+  } else {
+    quality = 'Hazardous';
+    color = const Color(0xFF3D1B18);
+  }
+  return [quality, color];
+}
+
+String getMoonImage(String value) {
+  String moonImage = " ";
+  if (value == 'New') {
+    moonImage = 'assets/New.png';
+  } else if (value == 'Full') {
+    moonImage = 'assets/full.png';
+  } else if (value == 'Waning Crescent') {
+    moonImage = 'assets/waning_cresent.png';
+  } else if (value == 'Waning Gibbous') {
+    moonImage = 'assets/waning_gibbous.png';
+  } else if (value == 'Waxing Crescent') {
+    moonImage = 'assets/waxing_cresent.png';
+  } else if (value == 'Waning Crescent') {
+    moonImage = 'assets/waning_cresent.png';
+  } else if (value == 'Last Quarter') {
+    moonImage = 'assets/last_q.png';
+  } else {
+    moonImage = 'assets/first_q';
+  }
+  return moonImage;
 }

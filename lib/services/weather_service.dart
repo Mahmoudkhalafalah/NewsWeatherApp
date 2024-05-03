@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 import 'package:news_weather_app_project/models/weather_forecast_model.dart';
 import 'package:news_weather_app_project/services/location_service.dart';
 
