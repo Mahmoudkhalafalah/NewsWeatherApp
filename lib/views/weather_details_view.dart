@@ -8,15 +8,17 @@ import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 
 
+String? test;
+
 class WeatherDetails extends StatefulWidget {
-/*
-  const WeatherDetails({Key? key , required this.weatherModell}) : super (key: key);
-  final WeatherModel weatherModell;
-*/
+
+  WeatherDetails({Key? key}) ;
 
   @override
   State<WeatherDetails> createState() => _WeatherDetailsState();
+  
 }
+
 
 class _WeatherDetailsState extends State<WeatherDetails> {
   void updateUI() {
@@ -25,16 +27,17 @@ class _WeatherDetailsState extends State<WeatherDetails> {
 
   @override
   Widget build(BuildContext context) {
-    var weatherModell = BlocProvider
-        .of<GetWeatherCubit>(context)
-        .weatherModell;
+
+
+    WeatherModel weatherModell = BlocProvider.of<GetWeatherCubit>(context).weatherModell;
 
     double width = MediaQuery
         .of(context)
         .size
         .width;
-    if (weatherDataList == null || weatherModell == null) {
-      return Scaffold(
+
+    if (weatherModell == null) {
+       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
@@ -102,18 +105,18 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            weatherModell?.cityName ?? 'na',
+                            weatherModell.cityName,
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                              fontSize: 64,
+                              fontSize: 40,
                               color: Colors.white,
                             ),
                           ),
                           SizedBox(
-                            height: 16,
+                            height: 8,
                           ),
                           Text(
-                            'cloud',
+                            weatherModell.countryName,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 16,
@@ -124,7 +127,18 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                             height: 32,
                           ),
                           Text(
-                            '33° / 18° feels like 20°',
+                            weatherModell.weatherCondition,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Text(
+                            '${(weatherModell.maxTemp).toInt()}° / ${(weatherModell.minTemp).toInt()}° feels like ${(weatherModell?.tempFeeling ?? 0).toInt()}°',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 24,
@@ -135,7 +149,7 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                       ),
                       Icon(
                         Icons.cloud,
-                        size: 80,
+                        size: 50,
                         color: Colors.white,
                       )
                     ],
@@ -147,72 +161,79 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                     child: Column(
                       children: [
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
+                          day: getDayName(
+                              weatherDataList?[0].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[0].humidity,
+                          srcImage: weatherDataList?[0].icon,
+                          maxTemp: weatherDataList?[0].maxTemp,
+                          minTemp: weatherDataList?[0].minTemp,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
+                          day: getDayName(
+                              weatherDataList?[1].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[1].humidity,
+                          srcImage: weatherDataList?[1].icon,
+                          maxTemp: weatherDataList?[1].maxTemp,
+                          minTemp: weatherDataList?[1].minTemp,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
+                          day: getDayName(
+                              weatherDataList?[2].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[2].humidity,
+                          srcImage: weatherDataList?[2].icon,
+                          maxTemp: weatherDataList?[2].maxTemp,
+                          minTemp: weatherDataList?[2].minTemp,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
+                          day: getDayName(
+                              weatherDataList?[3].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[3].humidity,
+                          srcImage: weatherDataList?[3].icon,
+                          maxTemp: weatherDataList?[3].maxTemp,
+                          minTemp: weatherDataList?[3].minTemp,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
+                          day: getDayName(
+                              weatherDataList?[4].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[4].humidity,
+                          srcImage: weatherDataList?[4].icon,
+                          maxTemp: weatherDataList?[4].maxTemp,
+                          minTemp: weatherDataList?[4].minTemp,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
+                          day: getDayName(
+                              weatherDataList?[5].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[5].humidity,
+                          srcImage: weatherDataList?[5].icon,
+                          maxTemp: weatherDataList?[5].maxTemp,
+                          minTemp: weatherDataList?[5].minTemp,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         CustomForecastDayWidget(
-                          day: 'Manday',
-                          humidity: 70,
-                          srcImage: "//cdn.weatherapi.com/weather/64x64/night/113.png",
-                          maxTemp: 37,
-                          minTemp: 30,
-                        )
+                          day: getDayName(
+                              weatherDataList?[6].date ?? "2024-05-01"),
+                          humidity: weatherDataList?[6].humidity,
+                          srcImage: weatherDataList?[6].icon,
+                          maxTemp: weatherDataList?[6].maxTemp,
+                          minTemp: weatherDataList?[6].minTemp,
+                        ),
                       ],
                     ),
                   ),
@@ -228,12 +249,14 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                                 Text(
                                   'AQI',
                                   style: TextStyle(
-                                      fontSize: 32, color: Colors.white),
+                                      fontSize: 32,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  'High',
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white),
+                                  '${getAirQuality(weatherModell?.airQuality ?? 12)[0]} (${(weatherModell?.airQuality ?? 0).toInt()})',
+                                  style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
                                 ),
                                 SizedBox(
                                   height: 8,
@@ -241,11 +264,12 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                                 SizedBox(
                                   width: 0.6 * width,
                                   child: LinearProgressIndicator(
-                                    value: 0.3,
-                                    color: Colors.green,
+                                    value: ((weatherModell?.airQuality ?? 12) / 30),
+                                    color: getAirQuality(
+                                        weatherModell?.airQuality ?? 12)[1],
                                     backgroundColor: Color(0xffB0AEAE),
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                    BorderRadius.all(Radius.circular(5)),
                                     minHeight: 10,
                                   ),
                                 )
@@ -262,16 +286,18 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       CustomSmallContainer(
-                          label: 'UV Index',
-                          icon: Icons.light_mode,
-                          value: 'LOW'),
+                        label: 'UV Index',
+                        icon: Icons.light_mode,
+                        value: '${weatherModell?.uvIndex ?? 8}',
+                      ),
                       SizedBox(
                         width: 8,
                       ),
                       CustomSmallContainer(
-                          label: 'UV Index',
-                          icon: Icons.light_mode,
-                          value: 'LOW')
+                        label: 'Humidity',
+                        icon: Icons.water_drop,
+                        value: '${weatherModell?.humidity}%',
+                      )
                     ],
                   ),
                   SizedBox(
@@ -282,16 +308,19 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       CustomSmallContainer(
-                          label: 'UV Index',
-                          icon: Icons.light_mode,
-                          value: 'LOW'),
+                        label: 'Wind',
+                        icon: Icons.air,
+                        value:
+                        '${weatherModell?.windSpeed} km/hr (${weatherModell?.windDirection})',
+                      ),
                       SizedBox(
                         width: 8,
                       ),
                       CustomSmallContainer(
-                          label: 'UV Index',
-                          icon: Icons.light_mode,
-                          value: 'LOW')
+                        label: 'Dew Point',
+                        icon: Icons.thermostat,
+                        value: '${weatherModell?.dewPoint ?? 10}°',
+                      )
                     ],
                   ),
                   SizedBox(
@@ -302,16 +331,18 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       CustomSmallContainer(
-                          label: 'UV Index',
-                          icon: Icons.light_mode,
-                          value: 'LOW'),
+                        label: 'Pressure',
+                        icon: Icons.compress_outlined,
+                        value: '${weatherModell?.pressure ?? 0} mb',
+                      ),
                       SizedBox(
                         width: 8,
                       ),
                       CustomSmallContainer(
-                          label: 'UV Index',
-                          icon: Icons.light_mode,
-                          value: 'LOW')
+                        label: 'Visibility',
+                        icon: Icons.remove_red_eye_rounded,
+                        value: '${weatherModell?.visibility ?? 0} km',
+                      )
                     ],
                   ),
                   SizedBox(
@@ -326,28 +357,38 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                           Column(
                             children: [
                               Text(
-                                'sunrise',
-                                style: TextStyle(color: Colors.white),
+                                'Sunrise',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
                               ),
                               Text(
-                                '06:17',
+                                '${weatherModell?.sunRise}',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
                           Icon(
                             Icons.sunny_snowing,
-                            size: 64,
+                            size: 100,
                             color: Colors.orangeAccent,
                           ),
                           Column(
                             children: [
                               Text(
-                                'sunrise',
-                                style: TextStyle(color: Colors.white),
+                                'Sunset',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                              SizedBox(
+                                height: 8,
                               ),
                               Text(
-                                '06:17',
+                                '${weatherModell?.sunSet}',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
@@ -368,24 +409,31 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                           Column(
                             children: [
                               Text(
-                                'moonrise',
-                                style: TextStyle(color: Colors.white),
+                                'Moonrise',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                              SizedBox(
+                                height: 8,
                               ),
                               Text(
-                                '06:17',
+                                '${weatherModell?.moonRise}',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
                           Column(
                             children: [
-                              Icon(
-                                Icons.shield_moon,
-                                size: 64,
-                                color: Colors.white,
+                              Image.asset(
+                                getMoonImage(weatherModell?.moonPhase ?? "Full"),
+                                cacheHeight: 100,
+                                cacheWidth: 100,
+                              ),
+                              SizedBox(
+                                height: 8,
                               ),
                               Text(
-                                'Moon phase',
+                                '${weatherModell?.moonPhase}',
                                 style: TextStyle(color: Colors.white),
                               )
                             ],
@@ -393,17 +441,27 @@ class _WeatherDetailsState extends State<WeatherDetails> {
                           Column(
                             children: [
                               Text(
-                                'moonrise',
-                                style: TextStyle(color: Colors.white),
+                                'Moonset',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                              SizedBox(
+                                height: 8,
                               ),
                               Text(
-                                '06:17',
+                                '${weatherModell?.moonSet}',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
                         ],
                       ),
+                    ),
+                  ),
+                  Text(
+                    'Last Updated: ${weatherModell?.lastUpdated}',
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
                   )
                 ],

@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:news_weather_app_project/cubits/get_weather_cubit/get_weather_states.dart';
 import 'package:news_weather_app_project/views/weather_details_view.dart';
-import 'package:news_weather_app_project/views/weather_search_view.dart';
-
 import 'Weather_home_default_view.dart';
 
 
@@ -20,6 +18,7 @@ class ControlView extends StatelessWidget {
             return  WeatherHomeDetails();
           } else if (state is WeatherLoadedState )
             {
+
               return  WeatherDetails();
             } else
               {

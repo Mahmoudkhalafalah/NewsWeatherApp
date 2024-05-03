@@ -16,10 +16,7 @@ import 'package:news_weather_app_project/views/widgets.dart';
 
 void main() {
 
-  runApp( MaterialApp(
-    home: WeatherApp()
-      ),
-  );
+  runApp( MaterialApp( home: WeatherApp() ) );
 }
 
 class WeatherApp extends StatelessWidget {

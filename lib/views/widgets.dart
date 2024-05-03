@@ -42,6 +42,7 @@ class CustomForecastDayWidget extends StatelessWidget {
   }
 }
 
+
 class CustomContainer extends StatelessWidget {
   const CustomContainer({super.key, required this.child});
   final Widget child;
@@ -57,6 +58,7 @@ class CustomContainer extends StatelessWidget {
     );
   }
 }
+
 
 class CustomSmallContainer extends StatelessWidget {
   const CustomSmallContainer(
@@ -106,6 +108,7 @@ class CustomSmallContainer extends StatelessWidget {
     );
   }
 }
+
 
 String getDayName(String dateString) {
   DateTime date = DateFormat('yyyy-MM-dd').parse(dateString);

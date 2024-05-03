@@ -113,19 +113,19 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                           Text(
                             weatherModel?.countryName ?? "N/A",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 16,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(
-                            height: 16,
+                            height: 32,
                           ),
                           Text(
                             weatherModel?.weatherCondition ?? "N/A",
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 20,
                               color: Colors.white,
                             ),
                           ),
