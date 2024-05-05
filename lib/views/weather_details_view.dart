@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
 import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
+import 'package:news_weather_app_project/views/home.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 
@@ -43,7 +44,7 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return WeatherHomeDetails();
+                            return HomePage();
                           },
                         ));
                       },

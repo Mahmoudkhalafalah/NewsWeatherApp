@@ -42,6 +42,7 @@ dependencies:
   geocoding: ^3.0.0
   convex_bottom_bar: ^3.2.0
   fluttertoast: ^8.2.5
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,13 @@ flutter:
     - assets/waning_gibbous.png
     - assets/waxing_cresent.png
     - assets/waxing_gibbous.png
+    - assets/Business.PNG
+    - assets/entertainment.PNG
+    - assets/General.PNG
+    - assets/Health.PNG
+    - assets/Science.PNG
+    - assets/sport.PNG
+    - assets/technology.PNG
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
