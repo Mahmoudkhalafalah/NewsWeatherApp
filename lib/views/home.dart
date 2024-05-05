@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/models/article_model.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
@@ -22,15 +23,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Breeze Brief',
-            style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontFamily: 'Open Sans'),
-          ),
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Breeze Brief',
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'Open Sans'),
+              ),
+              IconButton(
+                icon : Icon(
+                  Icons.output,
+                ),
+                color : Colors.white,
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+              },)
+            ]
         ),
 
         elevation: 8, // Add elevation for material design effect
@@ -41,14 +53,14 @@ class _HomePageState extends State<HomePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                Color(0xFF323A69),
-                Color(0xff323A6B),
-                Color(0xFF374270),
-                Color(0xFF3E4977),
-                Color(0xFF4F598A),
-                Color(0xFF525D93),
-                Color(0xFF535D98),
-              ])),
+                    Color(0xFF323A69),
+                    Color(0xff323A6B),
+                    Color(0xFF374270),
+                    Color(0xFF3E4977),
+                    Color(0xFF4F598A),
+                    Color(0xFF525D93),
+                    Color(0xFF535D98),
+                  ])),
         ),
       ),
       body: _getPage(_selectedIndex),
@@ -102,15 +114,15 @@ class _HomeContentState extends State<HomeContent> {
     Dio dio = Dio();
     WeatherService weatherService = WeatherService(dio);
     weatherService.getWeatherDataWithLocation().then((value) => {
-          setState(() {
-            weatherBrief = value;
-          })
-        });
+      setState(() {
+        weatherBrief = value;
+      })
+    });
     NewsService(dio).getTopHeadlines(category: "general").then((value) => {
-          setState(() {
-            newsList = value;
-          })
-        });
+      setState(() {
+        newsList = value;
+      })
+    });
   }
 
   @override
@@ -124,14 +136,14 @@ class _HomeContentState extends State<HomeContent> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color(0xFF323A69),
-            Color(0xff323A6B),
-            Color(0xFF374270),
-            Color(0xFF3E4977),
-            Color(0xFF4F598A),
-            Color(0xFF525D93),
-            Color(0xFF535D98),
-          ])),
+                Color(0xFF323A69),
+                Color(0xff323A6B),
+                Color(0xFF374270),
+                Color(0xFF3E4977),
+                Color(0xFF4F598A),
+                Color(0xFF525D93),
+                Color(0xFF535D98),
+              ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(

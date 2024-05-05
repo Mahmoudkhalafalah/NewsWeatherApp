@@ -22,14 +22,14 @@ class WeatherDetailsWithSearch extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color(0xFF323A69),
-            Color(0xff323A6B),
-            Color(0xFF374270),
-            Color(0xFF3E4977),
-            Color(0xFF4F598A),
-            Color(0xFF525D93),
-            Color(0xFF535D98),
-          ])),
+                Color(0xFF323A69),
+                Color(0xff323A6B),
+                Color(0xFF374270),
+                Color(0xFF3E4977),
+                Color(0xFF4F598A),
+                Color(0xFF525D93),
+                Color(0xFF535D98),
+              ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -182,7 +182,7 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                                     weatherDetails.airQuality!)[1],
                                 backgroundColor: const Color(0xffB0AEAE),
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
+                                const BorderRadius.all(Radius.circular(5)),
                                 minHeight: 10,
                               ),
                             )
@@ -225,7 +225,7 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                       label: 'Wind',
                       icon: Icons.air,
                       value:
-                          '${weatherDetails.windSpeed} km/hr (${weatherDetails.windDirection})',
+                      '${weatherDetails.windSpeed} km/hr (${weatherDetails.windDirection})',
                     ),
                     const SizedBox(
                       width: 8,

@@ -18,14 +18,14 @@ class SearchView extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color(0xFF323A69),
-            Color(0xff323A6B),
-            Color(0xFF374270),
-            Color(0xFF3E4977),
-            Color(0xFF4F598A),
-            Color(0xFF525D93),
-            Color(0xFF535D98),
-          ])),
+                Color(0xFF323A69),
+                Color(0xff323A6B),
+                Color(0xFF374270),
+                Color(0xFF3E4977),
+                Color(0xFF4F598A),
+                Color(0xFF525D93),
+                Color(0xFF535D98),
+              ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -56,7 +56,7 @@ class SearchView extends StatelessWidget {
                   List<WeatherForecastModel>? weatherDataList;
                   try {
                     weatherModel =
-                        await weatherService.getWeatherData(cityName: value);
+                    await weatherService.getWeatherData(cityName: value);
                     weatherDataList = await weatherService
                         .getForecastWeatherData(cityName: value);
                   } on Exception catch (e) {
@@ -67,42 +67,42 @@ class SearchView extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => WeatherDetailsWithSearch(
-                                  weatherDetails: weatherModel!,
-                                  weatherDataList: weatherDataList!,
-                                )));
+                              weatherDetails: weatherModel!,
+                              weatherDataList: weatherDataList!,
+                            )));
                   }
                 },
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 32,
-                  ),
-                  labelText: 'Search',
-                  suffixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  hintText: 'Enter city name',
-                  hintStyle: TextStyle(color: Colors.white),
-                  labelStyle: TextStyle(color: Colors.white),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 32,
+                    ),
+                    labelText: 'Search',
+                    suffixIcon: const Icon(
+                      Icons.search,
                       color: Colors.white,
                     ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
+                    hintText: 'Enter city name',
+                    hintStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
                     ),
-                  )
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
+                    )
                 ),
                 style: TextStyle(color: Colors.white),
               ),

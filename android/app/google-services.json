@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "167311342966",
+    "project_id": "weather-news-app-711a5",
+    "storage_bucket": "weather-news-app-711a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167311342966:android:0cf6f973b5316e26c88e57",
+        "android_client_info": {
+          "package_name": "com.example.news_weather_app_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvhWvWFlSKQo38i-yc0T05XpaS7s9Fv24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
