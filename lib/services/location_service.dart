@@ -42,9 +42,11 @@ class LocationService {
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
-  Future<String> getCityName()async {
-      Position pos = await determinePosition();
-      List<Placemark> placeMarks = await placemarkFromCoordinates(pos.latitude, pos.longitude);
-      return placeMarks[0].locality??"cairo";
+
+  Future<String> getCityName() async {
+    Position pos = await determinePosition();
+    List<Placemark> placeMarks =
+        await placemarkFromCoordinates(pos.latitude, pos.longitude);
+    return placeMarks[0].locality ?? "cairo";
   }
 }

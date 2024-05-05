@@ -3,7 +3,6 @@ import 'package:news_weather_app_project/views/home.dart';
 import 'package:news_weather_app_project/views/login.dart';
 import 'package:flutter/material.dart';
 
-
 class Auth extends StatelessWidget {
   const Auth({super.key});
 
@@ -12,7 +11,7 @@ class Auth extends StatelessWidget {
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: ((context , snapshot) {
+        builder: ((context, snapshot) {
           if (snapshot.hasData) {
             return HomePage();
           } else {

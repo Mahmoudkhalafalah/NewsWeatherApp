@@ -8,8 +8,11 @@ import 'package:news_weather_app_project/services/news_service.dart';
 import 'package:news_weather_app_project/services/weather_service.dart';
 import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/news_home_views.dart';
+import 'package:provider/provider.dart';
 
-int _selectedIndex = 0;
+import '../providers/app_provider.dart';
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,33 +20,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   @override
   Widget build(BuildContext context) {
+    int selectedIndex = Provider.of<AppProvider>(context).selectedIndex;
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Breeze Brief',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontFamily: 'Open Sans'),
-              ),
-              IconButton(
-                icon : Icon(
-                  Icons.output,
-                ),
-                color : Colors.white,
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-              },)
-            ]
-        ),
+        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(
+            'Breeze Brief',
+            style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'Open Sans'),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.output,
+            ),
+            color: Colors.white,
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+          )
+        ]),
 
         elevation: 8, // Add elevation for material design effect
         backgroundColor: Color(0xFF4F598A), // Set background color
@@ -53,17 +53,17 @@ class _HomePageState extends State<HomePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF323A69),
-                    Color(0xff323A6B),
-                    Color(0xFF374270),
-                    Color(0xFF3E4977),
-                    Color(0xFF4F598A),
-                    Color(0xFF525D93),
-                    Color(0xFF535D98),
-                  ])),
+                Color(0xFF323A69),
+                Color(0xff323A6B),
+                Color(0xFF374270),
+                Color(0xFF3E4977),
+                Color(0xFF4F598A),
+                Color(0xFF525D93),
+                Color(0xFF535D98),
+              ])),
         ),
       ),
-      body: _getPage(_selectedIndex),
+      body: _getPage(selectedIndex),
       bottomNavigationBar: ConvexAppBar(
         backgroundColor: Color(0xFF323A69),
         style: TabStyle.react, // Assuming you want the react style
@@ -73,10 +73,10 @@ class _HomePageState extends State<HomePage> {
           TabItem(icon: Icons.new_releases, title: 'News'),
           TabItem(icon: Icons.person, title: 'Profile'),
         ],
-        initialActiveIndex: _selectedIndex,
+        initialActiveIndex: selectedIndex,
         onTap: (int index) {
           setState(() {
-            _selectedIndex = index;
+            Provider.of<AppProvider>(context,listen: false).selectedIndex =  index;
           });
         },
       ),
@@ -114,19 +114,20 @@ class _HomeContentState extends State<HomeContent> {
     Dio dio = Dio();
     WeatherService weatherService = WeatherService(dio);
     weatherService.getWeatherDataWithLocation().then((value) => {
-      setState(() {
-        weatherBrief = value;
-      })
-    });
+          setState(() {
+            weatherBrief = value;
+          })
+        });
     NewsService(dio).getTopHeadlines(category: "general").then((value) => {
-      setState(() {
-        newsList = value;
-      })
-    });
+          setState(() {
+            newsList = value;
+          })
+        });
   }
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     if (weatherBrief == null || newsList == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
@@ -136,19 +137,19 @@ class _HomeContentState extends State<HomeContent> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF323A69),
-                Color(0xff323A6B),
-                Color(0xFF374270),
-                Color(0xFF3E4977),
-                Color(0xFF4F598A),
-                Color(0xFF525D93),
-                Color(0xFF535D98),
-              ])),
+            Color(0xFF323A69),
+            Color(0xff323A6B),
+            Color(0xFF374270),
+            Color(0xFF3E4977),
+            Color(0xFF4F598A),
+            Color(0xFF525D93),
+            Color(0xFF535D98),
+          ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
+            children:[
               Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Row(
@@ -201,7 +202,7 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
                     Image.network(
-                      'https:${weatherDataWithLocation?.icon ?? "//cdn.weatherapi.com/weather/64x64/night/113.png"}',
+                      'https:${weatherBrief?.icon ?? "//cdn.weatherapi.com/weather/64x64/night/113.png"}',
                       cacheWidth: 200,
                       cacheHeight: 200,
                     )
@@ -210,7 +211,7 @@ class _HomeContentState extends State<HomeContent> {
               ),
               SizedBox(height: 20),
               SizedBox(
-                height: 480, // Adjust the height of the list view
+                height: height - 200, // Adjust the height of the list view
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children: newsList!.map((article) {
@@ -221,7 +222,8 @@ class _HomeContentState extends State<HomeContent> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (article.image != null)
+
+                            if (article.image != null )
                               Image.network(
                                 '${article.image}',
                                 width: double.infinity,
@@ -252,24 +254,6 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class WeatherWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Weather Widget', style: TextStyle(fontSize: 24.0)),
-    );
-  }
-}
-
-class NewsWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('News Widget', style: TextStyle(fontSize: 24.0)),
     );
   }
 }

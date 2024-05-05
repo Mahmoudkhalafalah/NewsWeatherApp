@@ -8,43 +8,39 @@ class SignUpScreen extends StatefulWidget {
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
-  }
-
+}
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
-
-
-  Future signUp () async {
-     if (passwordConfirmed()){
-       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-         email: _emailController.text.trim(),
-         password: _passwordController.text.trim(),
-       );
-       Navigator.of(context).pushReplacementNamed("loginScreen");
-     }
-  }
-
-
-  bool passwordConfirmed () {
-    if (_passwordController.text.trim() ==
-     _confirmPasswordController.text.trim() ) {
-      return true ;
-    } else {
-      return false ;
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      Navigator.of(context).pushReplacementNamed("loginScreen");
     }
   }
 
-  void openSignupScreen () {
-    Navigator.of(context).pushReplacementNamed("signupScreen");
+  bool passwordConfirmed() {
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void openSignInScreen() {
+    Navigator.of(context).pop();
   }
 
   @override
-  void dispose () {
+  void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -83,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: EdgeInsets.fromLTRB(0, 30, 0, 16),
                   child: TextField(
                     controller:
-                    _emailController, // Use the right controller to manage the input
+                        _emailController, // Use the right controller to manage the input
                     obscureText: false,
                     textAlign: TextAlign.start,
                     style: TextStyle(
@@ -110,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: TextField(
                     controller:
-                    _passwordController, // Use the right controller to manage the input
+                        _passwordController, // Use the right controller to manage the input
                     obscureText: true,
                     textAlign: TextAlign.start,
                     style: TextStyle(
@@ -137,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: TextField(
                     controller:
-                    _confirmPasswordController, // Use the right controller to manage the input
+                        _confirmPasswordController, // Use the right controller to manage the input
                     obscureText: true,
                     textAlign: TextAlign.start,
                     style: TextStyle(
@@ -164,13 +160,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: GestureDetector(
                     onTap: signUp,
-                    child : Container(
-                      padding : EdgeInsets.all(16),
+                    child: Container(
+                      padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
                           color: Color(0xFF535D98),
                           borderRadius: BorderRadius.circular(16)),
                       child: Center(
-                        child :Text(
+                        child: Text(
                           "Sign Up",
                           style: TextStyle(
                             fontSize: 16,
@@ -183,23 +179,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "already have an account?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: openSignInScreen,
+                      child: Text(
+                        ' Sign in',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff323A6B),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-
-
-
-class HomeContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Welcome to the Home Tab!', style: TextStyle(fontSize: 24.0)),
     );
   }
 }

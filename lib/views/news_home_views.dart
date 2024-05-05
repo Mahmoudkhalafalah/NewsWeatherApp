@@ -34,14 +34,14 @@ class _NewsHomeViewState extends State<NewsHomeView> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF323A69),
-                Color(0xff323A6B),
-                Color(0xFF374270),
-                Color(0xFF3E4977),
-                Color(0xFF4F598A),
-                Color(0xFF525D93),
-                Color(0xFF535D98),
-              ])),
+            Color(0xFF323A69),
+            Color(0xff323A6B),
+            Color(0xFF374270),
+            Color(0xFF3E4977),
+            Color(0xFF4F598A),
+            Color(0xFF525D93),
+            Color(0xFF535D98),
+          ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -53,7 +53,10 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.search,color: Colors.white,),
+                      icon: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -75,8 +78,8 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                     children: [
                       Text(
                         "Breaking News",
-                        style:
-                            TextStyle(fontWeight: FontWeight.w700, fontSize: 19),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 19),
                       ),
                     ],
                   ),
@@ -92,7 +95,6 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                           itemBuilder: (BuildContext context, int itemIndex,
                                   int pageViewIndex) =>
                               Container(
-
                             child: NewsTitleForCarousel(
                               articleModel: articles[itemIndex],
                             ),
@@ -112,7 +114,6 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                             enlargeFactor: 0.3,
                             scrollDirection: Axis.horizontal,
                             clipBehavior: Clip.hardEdge,
-
                           ),
                         )),
               SliverToBoxAdapter(

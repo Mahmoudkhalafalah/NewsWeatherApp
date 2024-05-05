@@ -15,29 +15,24 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  void _navigateToHome(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              HomePage()), // Ensure HomePage is defined elsewhere in your code
-    );
-  }
-
-  Future signIn () async {
+  Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
     );
     Navigator.of(context).pushReplacementNamed("/");
   }
 
-  void openSignupScreen () {
-    Navigator.of(context).pushReplacementNamed("signupScreen");
+  void openSignupScreen() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) {
+        return SignUpScreen();
+      },
+    ));
   }
+
   @override
-  void dispose () {
+  void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -129,91 +124,52 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: GestureDetector(
                     onTap: signIn,
-                    child : Container(
-                      padding : EdgeInsets.all(16),
+                    child: Container(
+                      padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Color(0xFF535D98),
-                        borderRadius: BorderRadius.circular(16)),
+                          color: Color(0xFF535D98),
+                          borderRadius: BorderRadius.circular(16)),
                       child: Center(
-                      child :Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xffffffff),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xffffffff),
                           ),
-                       ),
-                    ),
+                        ),
+                      ),
                       height: 55,
                     ),
                   ),
                 ),
-              Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Text(
-                     "Don't have an account?",
-                     style: TextStyle(
-                       fontWeight: FontWeight.w700,
-                       color: Colors.black,
-                     ),
-                 ),
-                 GestureDetector(
-                   onTap: openSignupScreen,
-                   child: Text(
-                      ' Sign up',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
                       style: TextStyle(
-                       fontWeight: FontWeight.w700,
-                        color: Color(0xff323A6B),
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
                       ),
-                   ),
-                 ),
-               ],
-           )
+                    ),
+                    GestureDetector(
+                      onTap: openSignupScreen,
+                      child: Text(
+                        ' Sign up',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff323A6B),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-
-
-
-class HomeContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Welcome to the Home Tab!', style: TextStyle(fontSize: 24.0)),
-    );
-  }
-}
-
-class WeatherWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Weather Widget', style: TextStyle(fontSize: 24.0)),
-    );
-  }
-}
-
-class NewsWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('News Widget', style: TextStyle(fontSize: 24.0)),
-    );
-  }
-}
-
-class ProfileWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Profile Widget', style: TextStyle(fontSize: 24.0)),
     );
   }
 }

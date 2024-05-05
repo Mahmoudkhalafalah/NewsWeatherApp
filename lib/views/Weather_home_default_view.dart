@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:news_weather_app_project/providers/app_provider.dart';
 import 'package:news_weather_app_project/services/weather_service.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
+import 'package:provider/provider.dart';
 import '../models/weather_forecast_model.dart';
 import '../models/weather_model.dart';
-
-WeatherModel? weatherDataWithLocation;
-List<WeatherForecastModel>? weatherDataListWithLocation;
 
 class WeatherHomeDetails extends StatefulWidget {
   const WeatherHomeDetails({super.key});
@@ -17,29 +16,17 @@ class WeatherHomeDetails extends StatefulWidget {
 }
 
 class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
-  void updateUI() {
-    setState(() {});
-  }
-
+  WeatherModel? weatherDataWithLocation;
+  List<WeatherForecastModel>? weatherDataListWithLocation;
   @override
-  void initState() {
-    super.initState();
-    WeatherService weatherService = WeatherService(Dio());
-    weatherService.getWeatherDataWithLocation().then((value) => {
-          setState(() {
-            weatherDataWithLocation = value;
-          })
-        });
-    weatherService.getForecastWeatherDataWithLocation().then((value) => {
-          setState(() {
-            weatherDataListWithLocation = value;
-          })
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    Provider.of<AppProvider>(context).setWeatherData();
+
+    weatherDataWithLocation = Provider.of<AppProvider>(context).weatherData;
+    weatherDataListWithLocation = Provider.of<AppProvider>(context).weatherDataList;
     if (weatherDataListWithLocation == null ||
         weatherDataWithLocation == null) {
       return const Scaffold(
@@ -401,7 +388,8 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                     style: const TextStyle(
                       color: Colors.white,
                     ),
-                  )
+                  ),
+                  SizedBox(height: 16,)
                 ],
               ),
             ),
@@ -411,5 +399,3 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
     }
   }
 }
-
-

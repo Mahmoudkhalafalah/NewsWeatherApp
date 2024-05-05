@@ -14,7 +14,7 @@ class WeatherService {
       List<WeatherForecastModel>.filled(
           7,
           WeatherForecastModel(
-              date: "date", humidity: 1, maxTemp: 1, minTemp: 1,icon: ""));
+              date: "date", humidity: 1, maxTemp: 1, minTemp: 1, icon: ""));
   WeatherService(this.dio);
   Future<WeatherModel> getWeatherData({required String cityName}) async {
     try {
@@ -32,18 +32,16 @@ class WeatherService {
   }
 
   Future<WeatherModel> getWeatherDataWithLocation() async {
-
     String cityName = await LocationService().getCityName();
     return getWeatherData(cityName: cityName);
-
   }
 
-  Future<List<WeatherForecastModel>> getForecastWeatherDataWithLocation() async {
-
+  Future<List<WeatherForecastModel>>
+      getForecastWeatherDataWithLocation() async {
     String cityName = await LocationService().getCityName();
     return getForecastWeatherData(cityName: cityName);
-
   }
+
   Future<List<WeatherForecastModel>> getForecastWeatherData(
       {required String cityName}) async {
     try {
@@ -64,5 +62,3 @@ class WeatherService {
     }
   }
 }
-
-
