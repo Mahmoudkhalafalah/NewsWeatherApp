@@ -14,7 +14,9 @@ void main() async {
           apiKey: 'AIzaSyDvhWvWFlSKQo38i-yc0T05XpaS7s9Fv24',
           appId: '167311342966:android:0cf6f973b5316e26c88e57',
           messagingSenderId: '167311342966',
-          projectId: 'weather-news-app-711a5'));
+          projectId: 'weather-news-app-711a5',
+        storageBucket: 'weather-news-app-711a5.appspot.com'
+      ));
 
   runApp(
     ChangeNotifierProvider(

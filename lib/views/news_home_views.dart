@@ -1,11 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:news_weather_app_project/views/add_news.dart';
 import 'package:news_weather_app_project/views/news_search_view.dart';
+import 'package:news_weather_app_project/views/user_reported_news.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
 import '../widgets/categories_list_view.dart';
 import '../widgets/newsTitleForCarusal.dart';
 import '../widgets/news_list_view_builder.dart';
+
+
 
 class NewsHomeView extends StatefulWidget {
   const NewsHomeView({super.key});
@@ -16,6 +20,7 @@ class NewsHomeView extends StatefulWidget {
 
 class _NewsHomeViewState extends State<NewsHomeView> {
   var articles;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +44,17 @@ class _NewsHomeViewState extends State<NewsHomeView> {
             Color(0xFF535D98),
           ])),
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF323A69),
+          child: Icon(Icons.add),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AddNews();
+                });
+          },
+        ),
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -58,6 +74,18 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                             MaterialPageRoute(builder: (context) {
                           return const search_view();
                         }));
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.pending_actions,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return UserNews();
+                            }));
                       },
                     ),
                   ],
