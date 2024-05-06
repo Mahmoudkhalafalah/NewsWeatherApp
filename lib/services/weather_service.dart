@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:news_weather_app_project/models/weather_forecast_model.dart';
 import 'package:news_weather_app_project/services/location_service.dart';
 
@@ -32,8 +33,19 @@ class WeatherService {
   }
 
   Future<WeatherModel> getWeatherDataWithLocation() async {
-    String cityName = await LocationService().getCityName();
-    return getWeatherData(cityName: cityName);
+    Position pos = await LocationService().determinePosition();
+    try {
+      Response response = await dio.get(
+          '$baseUrl/forecast.json?key=$apiKey&q=${pos.latitude},${pos.longitude}&aqi=yes');
+      WeatherModel weatherModel = WeatherModel.fromJson(response.data);
+      return weatherModel;
+    } on DioException catch (e) {
+      final errMsg = e.response?.data['error']['message'] ?? ', Try Later';
+      throw Exception(errMsg);
+    } catch (e) {
+      log(e.toString());
+      throw Exception('Error, Try Later');
+    }
   }
 
   Future<List<WeatherForecastModel>>

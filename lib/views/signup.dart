@@ -26,16 +26,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
         _confirmPasswordController.text.trim());
-    try{
+    try {
       FirebaseFirestore.instance.collection('users').add({
-        'Name' : _nameController.text.trim(),
-        'Email' : _emailController.text.trim()
+        'Name': _nameController.text.trim(),
+        'Email': _emailController.text.trim()
       });
-    }
-    on Exception catch(e){
+    } on Exception catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
-    Navigator.of(context).pushReplacementNamed("loginScreen");
+    Navigator.of(context).pop();
   }
 
   bool passwordConfirmed() {
@@ -48,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void openSignInScreen() {
-    Navigator.of(context).pushReplacementNamed("loginScreen");
+    Navigator.of(context).pop();
   }
 
   @override
@@ -86,7 +85,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 const Align(
                   alignment: Alignment.center,
                   child: Text(

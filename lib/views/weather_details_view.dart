@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
@@ -68,12 +69,14 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          weatherDetails.cityName,
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            fontSize: 40,
-                            color: Colors.white,
+                        Expanded(
+                          child: Text(
+                            weatherDetails.cityName,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         const SizedBox(

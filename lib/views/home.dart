@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_weather_app_project/auth.dart';
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            'Breeze Brief',
+            'BreezeBrief',
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -136,12 +137,14 @@ class _HomeContentState extends State<HomeContent> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          weatherBrief?.cityName ?? "N/A",
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            fontSize: 40,
-                            color: Colors.white,
+                        Expanded(
+                          child: Text(
+                            weatherBrief?.cityName ?? "N/A",
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         const SizedBox(

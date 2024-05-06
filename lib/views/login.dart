@@ -87,7 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16,),
+                SizedBox(
+                  height: 16,
+                ),
                 const Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -117,7 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         .changeLoginPassVisibility();
                   },
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -139,7 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: GestureDetector(
@@ -185,7 +191,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-
                 const SizedBox(
                   height: 24,
                 ),
@@ -197,15 +202,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (isBiometric) {
                         Provider.of<AppProvider>(context, listen: false)
                             .signInAnonymous = true;
-                        Navigator.of(context).pushReplacementNamed("homeScreen");
+                        Navigator.of(context)
+                            .pushReplacementNamed("homeScreen");
                       }
                     },
-                    child: const Text(
-                      'Use Biometrics',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xff323A6B),
-                      ),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.fingerprint_rounded,
+                          color: Color(0xff323A6B),
+                          size: 40,
+                        ),
+                        const Text(
+                          'Use Biometrics',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xff323A6B),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

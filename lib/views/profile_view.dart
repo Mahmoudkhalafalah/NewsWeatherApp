@@ -17,11 +17,11 @@ class ProfileWidget extends StatelessWidget {
         child: FloatingActionButton(
           elevation: 8,
           onPressed: () {
-            if(!signIn){
-            AuthService().signOut();
-            }
-            else{
-              Provider.of<AppProvider>(context,listen: false).selectedIndex = 0;
+            if (!signIn) {
+              AuthService().signOut();
+            } else {
+              Provider.of<AppProvider>(context, listen: false).selectedIndex =
+                  0;
               Navigator.of(context).pushReplacementNamed("loginScreen");
             }
           },
@@ -84,7 +84,7 @@ Widget displayUserInformation(context, snapshot) {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Created: ${DateFormat('MM/dd/yyyy').format(user?.metadata?.creationTime??DateTime.timestamp())}",
+                "Created: ${DateFormat('MM/dd/yyyy').format(user?.metadata?.creationTime ?? DateTime.timestamp())}",
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),

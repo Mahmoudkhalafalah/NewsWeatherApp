@@ -18,6 +18,7 @@ class AppProvider extends ChangeNotifier {
 
   List<ArticleModel>? generalArticles;
 
+
   int _selectedIndex = 0;
 
   Icon loginPasswordFieldIcon = const Icon(Icons.remove_red_eye_rounded);

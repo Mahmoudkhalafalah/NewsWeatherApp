@@ -15,8 +15,7 @@ void main() async {
           appId: '167311342966:android:0cf6f973b5316e26c88e57',
           messagingSenderId: '167311342966',
           projectId: 'weather-news-app-711a5',
-        storageBucket: 'weather-news-app-711a5.appspot.com'
-      ));
+          storageBucket: 'weather-news-app-711a5.appspot.com'));
 
   runApp(
     ChangeNotifierProvider(
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
         debugShowCheckedModeBanner: false,
         title: 'Weather App',
         theme: ThemeData(
@@ -42,9 +40,8 @@ class MyApp extends StatelessWidget {
         ),
         // home:Auth(),
         routes: {
-
           '/': (context) => const Auth(),
-          'homeScreen': (context) =>  HomePage(),
+          'homeScreen': (context) => HomePage(),
           'signupScreen': (context) => const SignUpScreen(),
           'loginScreen': (context) => const LoginScreen(),
         });

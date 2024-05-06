@@ -11,12 +11,14 @@ class UserNews extends StatefulWidget {
 class _UserNewsState extends State<UserNews> {
   List<String> docIDs = [];
   Future getDocId() async {
-    await FirebaseFirestore.instance
-        .collection('news')
-        .get()
-        .then((value) => value.docs.forEach((element) {
-              docIDs.add(element.reference.id);
-            }));
+    if (docIDs.isEmpty) {
+      await FirebaseFirestore.instance
+          .collection('news')
+          .get()
+          .then((value) => value.docs.forEach((element) {
+                docIDs.add(element.reference.id);
+              }));
+    }
   }
 
   CollectionReference news = FirebaseFirestore.instance.collection('news');
@@ -63,10 +65,11 @@ class _UserNewsState extends State<UserNews> {
                     builder: (BuildContext context, snapshot) {
                       if (docIDs.isEmpty)
                         return Center(
-                            child: Text(
-                          'No reported News',
-                          style: TextStyle(color: Colors.white, fontSize: 32),
-                        ),);
+                          child: Text(
+                            'No reported News',
+                            style: TextStyle(color: Colors.white, fontSize: 32),
+                          ),
+                        );
                       return ListView.builder(
                         itemCount: docIDs.length,
                         itemBuilder: (context, index) {
@@ -105,14 +108,14 @@ class GetData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.network(
-                      '${data['imgURL']}',
+                      '${(data['imgURL'].toString().isEmpty) ? data['imgURL'] : "https://th.bing.com/th/id/OIP.aV3_1sg9QEdADlu5byNWbwAAAA?w=222&h=180&c=7&r=0&o=5&pid=1.7"}',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,
                     ),
                     ListTile(
                       title: Text(
-                        data['title'],
+                        '${data['title']} ,${data['imgURL']} ',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,

@@ -27,12 +27,10 @@ class _AddNewsState extends State<AddNews> {
     _descriptionController.dispose();
   }
 
-  Future addNews(String title,String description, String img) async {
-    FirebaseFirestore.instance.collection('news').add({
-      'title' : title,
-      'desc' : description,
-      'imgURL' : img
-    });
+  Future addNews(String title, String description, String img) async {
+    FirebaseFirestore.instance
+        .collection('news')
+        .add({'title': title, 'desc': description, 'imgURL': img});
   }
 
   @override
@@ -82,8 +80,7 @@ class _AddNewsState extends State<AddNews> {
                   ImagePicker image = ImagePicker();
                   XFile? imageFile =
                       await image.pickImage(source: ImageSource.camera);
-                  if(imageFile == null)
-                    return;
+                  if (imageFile == null) return;
                   var refRoot = FirebaseStorage.instance.ref();
                   var refDir = refRoot.child('images');
                   var refImg = refDir.child(unique);
@@ -105,7 +102,8 @@ class _AddNewsState extends State<AddNews> {
             ),
             ElevatedButton(
               onPressed: () async {
-                await addNews(_titleController.text.trim(),_descriptionController.text.trim(),imgURL);
+                await addNews(_titleController.text.trim(),
+                    _descriptionController.text.trim(), imgURL);
                 Navigator.of(context).pop();
               },
               child: const Text(
