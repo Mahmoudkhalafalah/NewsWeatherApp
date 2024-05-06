@@ -8,6 +8,7 @@ import 'package:news_weather_app_project/widgets/input_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:news_weather_app_project/views/signup.dart';
 
+import '../auth.dart';
 import '../widgets/reset_pass_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,11 +36,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async {
-    AuthService().signInWithEmailAndPassword(
+    showDialog(context: context, builder: (context){
+      return Center(child: CircularProgressIndicator(),);
+    });
+    await AuthService().signInWithEmailAndPassword(
         _emailController.text.trim().toLowerCase(),
         _passwordController.text.trim());
     Provider.of<AppProvider>(context, listen: false).signInAnonymous = false;
-    Navigator.of(context).pushReplacementNamed("/");
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context){
+      return Auth();
+    }), (r){
+      return false;
+    });
   }
 
   void openSignupScreen() {

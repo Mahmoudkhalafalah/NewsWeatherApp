@@ -5,6 +5,7 @@ import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
 import '../widgets/input_text_field.dart';
+import 'login.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -21,7 +22,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController();
 
   Future signUp() async {
-    AuthService().signUp(
+    showDialog(context: context, builder: (context){
+      return Center(child: CircularProgressIndicator(),);
+    });
+
+    await AuthService().signUp(
         _emailController.text.trim(),
         _passwordController.text.trim(),
         _confirmPasswordController.text.trim());
@@ -33,7 +38,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } on Exception catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
-    Navigator.of(context).pop();
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context){
+      return LoginScreen();
+    }), (r){
+      return false;
+    });
   }
 
   bool passwordConfirmed() {

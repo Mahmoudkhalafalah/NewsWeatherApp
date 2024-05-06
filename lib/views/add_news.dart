@@ -26,9 +26,14 @@ class _AddNewsState extends State<AddNews> {
   }
 
   Future addNews(String title, String description, String img) async {
-    FirebaseFirestore.instance
+    showDialog(context: context, builder: (context){
+      return Center(child: CircularProgressIndicator(),);
+    });
+     await FirebaseFirestore.instance
         .collection('news')
         .add({'title': title, 'desc': description, 'imgURL': img});
+     Navigator.of(context).pop();
+
   }
 
   @override
@@ -82,12 +87,16 @@ class _AddNewsState extends State<AddNews> {
                   var refRoot = FirebaseStorage.instance.ref();
                   var refDir = refRoot.child('images');
                   var refImg = refDir.child(unique);
+                  showDialog(context: context, builder: (context){
+                    return Center(child: CircularProgressIndicator(),);
+                  });
                   try {
                     await refImg.putFile(File(imageFile.path));
                     imgURL = await refImg.getDownloadURL();
                   } on Exception catch (e) {
                     Fluttertoast.showToast(msg: e.toString());
                   }
+                  Navigator.of(context).pop();
                 },
                 child: TextField(
                   decoration: const InputDecoration(
