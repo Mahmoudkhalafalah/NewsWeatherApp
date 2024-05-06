@@ -71,7 +71,7 @@ Widget displayUserInformation(context, snapshot) {
               child: Icon(
                 Icons.person,
                 color: Colors.white,
-                size: 200,
+                size: 150,
               ),
             ),
             Padding(

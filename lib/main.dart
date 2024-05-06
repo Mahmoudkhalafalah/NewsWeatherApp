@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
         debugShowCheckedModeBanner: false,
         title: 'Weather App',
         theme: ThemeData(
@@ -41,8 +42,9 @@ class MyApp extends StatelessWidget {
         ),
         // home:Auth(),
         routes: {
+
           '/': (context) => const Auth(),
-          'homeScreen': (context) => const HomePage(),
+          'homeScreen': (context) =>  HomePage(),
           'signupScreen': (context) => const SignUpScreen(),
           'loginScreen': (context) => const LoginScreen(),
         });

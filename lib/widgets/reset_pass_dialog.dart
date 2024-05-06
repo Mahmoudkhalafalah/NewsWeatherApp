@@ -49,7 +49,7 @@ class _PasswordResetState extends State<PasswordReset> {
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
-                  hintText: 'example',
+                  hintText: 'om@gmail.com',
                   hintStyle: TextStyle(color: Colors.white),
                   contentPadding: EdgeInsets.only(left: 8)),
               style: const TextStyle(color: Colors.white),
