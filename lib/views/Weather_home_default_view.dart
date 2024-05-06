@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/providers/app_provider.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
-import 'package:news_weather_app_project/views/widgets.dart';
+import 'package:news_weather_app_project/widgets/weather_widgets.dart';
 import 'package:provider/provider.dart';
 import '../models/weather_forecast_model.dart';
 import '../models/weather_model.dart';
@@ -80,14 +80,12 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Text(
-                              weatherDataWithLocation?.cityName ?? "N/A",
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
+                          Text(
+                            weatherDataWithLocation?.cityName ?? "N/A",
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
                             ),
                           ),
                           const SizedBox(

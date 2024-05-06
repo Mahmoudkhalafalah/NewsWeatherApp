@@ -137,14 +137,12 @@ class _HomeContentState extends State<HomeContent> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Text(
-                            weatherBrief?.cityName ?? "N/A",
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                              fontSize: 40,
-                              color: Colors.white,
-                            ),
+                        Text(
+                          '${(weatherBrief?.cityName ?? "N/A").substring(0,20)}',
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            fontSize: 40,
+                            color: Colors.white,
                           ),
                         ),
                         const SizedBox(
