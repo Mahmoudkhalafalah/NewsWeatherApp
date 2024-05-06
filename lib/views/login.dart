@@ -1,9 +1,6 @@
 // import 'dart:js_interop';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:news_weather_app_project/providers/app_provider.dart';
 import 'package:news_weather_app_project/services/auth_service.dart';

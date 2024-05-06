@@ -1,12 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:news_weather_app_project/auth.dart';
 import 'package:news_weather_app_project/models/article_model.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
-import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/news_home_views.dart';
 import 'package:news_weather_app_project/views/profile_view.dart';

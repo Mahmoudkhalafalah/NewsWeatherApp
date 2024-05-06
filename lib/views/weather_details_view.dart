@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
