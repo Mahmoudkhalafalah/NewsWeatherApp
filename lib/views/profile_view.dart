@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/app_provider.dart';
 import '../services/auth_service.dart';
 
 class ProfileWidget extends StatelessWidget {
+  const ProfileWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
+    bool signIn = Provider.of<AppProvider>(context).signInAnonymous;
     return Scaffold(
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 24),
         child: FloatingActionButton(
           elevation: 8,
           onPressed: () {
+            if(!signIn){
             AuthService().signOut();
+            }
+            else{
+              Provider.of<AppProvider>(context,listen: false).selectedIndex = 0;
+              Navigator.of(context).pushReplacementNamed("loginScreen");
+            }
           },
-          backgroundColor: Color(0xFF323A69),
-          child: Icon(Icons.output_rounded),
+          backgroundColor: const Color(0xFF323A69),
+          child: const Icon(Icons.output_rounded),
         ),
       ),
       body: FutureBuilder(
@@ -24,7 +35,7 @@ class ProfileWidget extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return displayUserInformation(context, snapshot);
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         },
       ),
@@ -55,8 +66,8 @@ Widget displayUserInformation(context, snapshot) {
             ])),
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Icon(
                 Icons.person,
                 color: Colors.white,
@@ -66,15 +77,15 @@ Widget displayUserInformation(context, snapshot) {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Email: ${user.email ?? 'Anonymous'}",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                "Email: ${user?.email ?? 'Anonymous'}",
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Created: ${DateFormat('MM/dd/yyyy').format(user.metadata.creationTime)}",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                "Created: ${DateFormat('MM/dd/yyyy').format(user?.metadata?.creationTime??DateTime.timestamp())}",
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           ],

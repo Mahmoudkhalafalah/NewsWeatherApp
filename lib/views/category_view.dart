@@ -28,7 +28,7 @@ class CategoryView extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               category,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             backgroundColor: Colors.transparent,
             leading: IconButton(

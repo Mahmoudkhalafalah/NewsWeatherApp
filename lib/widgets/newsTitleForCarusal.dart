@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/article_model.dart';
 
 class NewsTitleForCarousel extends StatelessWidget {
-  const NewsTitleForCarousel({Key? key, required this.articleModel});
+  const NewsTitleForCarousel({super.key, required this.articleModel});
 
   final ArticleModel articleModel;
 
@@ -37,7 +37,7 @@ class NewsTitleForCarousel extends StatelessWidget {
                 Text(
                   articleModel.title ?? "",
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
@@ -45,7 +45,7 @@ class NewsTitleForCarousel extends StatelessWidget {
                 Text(
                   articleModel.subTitle ?? "",
                   maxLines: 2,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 )
               ],
             ),

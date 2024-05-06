@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/providers/app_provider.dart';
-import 'package:news_weather_app_project/services/weather_service.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/views/widgets.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +62,7 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return SearchView();
+                              return const SearchView();
                             },
                           ));
                         },
@@ -390,7 +388,7 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   )
                 ],

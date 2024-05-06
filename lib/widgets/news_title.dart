@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/article_model.dart';
 
 class NewsTitle extends StatelessWidget {
-  const NewsTitle({Key? key, required this.articleModel});
+  const NewsTitle({super.key, required this.articleModel});
 
   final ArticleModel articleModel;
 

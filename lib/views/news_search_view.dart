@@ -21,6 +21,7 @@ class _search_viewState extends State<search_view> {
     articles = await NewsService(Dio()).getTopHeadlines(category: "general");
   }
 
+  @override
   Widget build(BuildContext context) {
     show();
     return Container(
@@ -45,11 +46,11 @@ class _search_viewState extends State<search_view> {
             backgroundColor: Colors.transparent,
             title: TextField(
               controller: controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: 'Search',
                   hintStyle: TextStyle(color: Colors.white),
                   border: InputBorder.none),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               onChanged: (v) {
                 setState(() {
                   searchList = [];
@@ -74,8 +75,8 @@ class _search_viewState extends State<search_view> {
               ),
             ),
           ),
-          body: searchList.length == 0
-              ? Center(
+          body: searchList.isEmpty
+              ? const Center(
                   child: Text(
                     "Enter text you want to search for",
                     style: TextStyle(color: Colors.white),

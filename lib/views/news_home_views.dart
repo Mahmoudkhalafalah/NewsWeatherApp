@@ -22,7 +22,7 @@ class _NewsHomeViewState extends State<NewsHomeView> {
     Provider.of<AppProvider>(context, listen: false).getGeneralNews();
     articles = Provider.of<AppProvider>(context).generalArticles;
     if (articles == null) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Container(
       decoration: const BoxDecoration(
@@ -41,7 +41,7 @@ class _NewsHomeViewState extends State<NewsHomeView> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -56,19 +56,19 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return search_view();
+                          return const search_view();
                         }));
                       },
                     ),
                   ],
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: CategoriesListView(),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -85,7 +85,7 @@ class _NewsHomeViewState extends State<NewsHomeView> {
               ),
               SliverToBoxAdapter(
                   child: articles.isEmpty
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(),
                         )
                       : CarouselSlider.builder(
@@ -104,9 +104,9 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                             enableInfiniteScroll: true,
                             reverse: false,
                             autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 3),
+                            autoPlayInterval: const Duration(seconds: 3),
                             autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
+                                const Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enlargeCenterPage: true,
                             enlargeFactor: 0.3,
@@ -114,15 +114,15 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                             clipBehavior: Clip.hardEdge,
                           ),
                         )),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 32,
                 ),
               ),
-              NewsListViewBuilder(
+              const NewsListViewBuilder(
                 category: 'technology',
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 8,
                 ),

@@ -9,7 +9,7 @@ import 'package:news_weather_app_project/views/weather_details_view.dart';
 WeatherService weatherService = WeatherService(Dio());
 
 class SearchView extends StatelessWidget {
-  SearchView({super.key});
+  const SearchView({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,8 +83,8 @@ class SearchView extends StatelessWidget {
                   color: Colors.white,
                 ),
                 hintText: 'Enter city name',
-                hintStyle: TextStyle(color: Colors.white),
-                labelStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
+                labelStyle: const TextStyle(color: Colors.white),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: const BorderSide(
@@ -104,7 +104,7 @@ class SearchView extends StatelessWidget {
                   ),
                 ),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),

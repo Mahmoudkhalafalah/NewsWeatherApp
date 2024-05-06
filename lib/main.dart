@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news_weather_app_project/providers/app_provider.dart';
-import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/home.dart';
 import 'package:news_weather_app_project/views/login.dart';
 import 'package:news_weather_app_project/views/signup.dart';
@@ -22,12 +21,14 @@ void main() async {
       create: (context) {
         return AppProvider();
       },
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         // home:Auth(),
         routes: {
           '/': (context) => const Auth(),
-          'homeScreen': (context) => HomePage(),
+          'homeScreen': (context) => const HomePage(),
           'signupScreen': (context) => const SignUpScreen(),
           'loginScreen': (context) => const LoginScreen(),
         });

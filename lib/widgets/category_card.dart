@@ -32,7 +32,7 @@ class CategoryCard extends StatelessWidget {
                 image: AssetImage(category.image),
                 fit: BoxFit.fill,
                 colorFilter:
-                    ColorFilter.mode(Colors.black26, BlendMode.overlay)),
+                    const ColorFilter.mode(Colors.black26, BlendMode.overlay)),
             color: Colors.deepPurple,
           ),
           child: Center(

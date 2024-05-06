@@ -32,30 +32,30 @@ class _PasswordResetState extends State<PasswordReset> {
   Widget build(BuildContext context) {
     return Dialog(
       shadowColor: Colors.transparent,
-      backgroundColor: Color(0xFF535D98),
+      backgroundColor: const Color(0xFF535D98),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      child: Container(
+      child: SizedBox(
         height: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Text(
+            const Text(
               "Enter Your Email",
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: 'example',
                   hintStyle: TextStyle(color: Colors.white),
                   contentPadding: EdgeInsets.only(left: 8)),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             GestureDetector(
-              child: Text(
+              child: const Text(
                 'Close',
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
@@ -67,7 +67,7 @@ class _PasswordResetState extends State<PasswordReset> {
                 onPressed: () {
                   passwordReset();
                 },
-                child: Text(
+                child: const Text(
                   "send",
                   style: TextStyle(fontSize: 16),
                 )),

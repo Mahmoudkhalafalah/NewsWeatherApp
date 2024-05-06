@@ -1,10 +1,8 @@
-import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PasswordCustomTextField extends StatelessWidget {
-  PasswordCustomTextField(
+  const PasswordCustomTextField(
       {super.key,
       required this.controller,
       required this.visibility,
@@ -19,12 +17,12 @@ class PasswordCustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
       child: TextField(
         controller: controller, // Use the right controller to manage the input
         obscureText: visibility,
         textAlign: TextAlign.start,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w400,
           fontStyle: FontStyle.normal,
           fontSize: 14,
@@ -36,11 +34,11 @@ class PasswordCustomTextField extends StatelessWidget {
             onPressed: onPress,
           ),
           hintText: hint,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Color(0xff9f9d9d),
           ),
           filled: true,
-          fillColor: Color(0xfff2f2f3),
+          fillColor: const Color(0xfff2f2f3),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
             borderSide: BorderSide.none,
@@ -52,7 +50,7 @@ class PasswordCustomTextField extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.controller,
     required this.visibility,
@@ -64,12 +62,12 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
       child: TextField(
         controller: controller, // Use the right controller to manage the input
         obscureText: visibility,
         textAlign: TextAlign.start,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w400,
           fontStyle: FontStyle.normal,
           fontSize: 14,
@@ -77,11 +75,11 @@ class CustomTextField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Color(0xff9f9d9d),
           ),
           filled: true,
-          fillColor: Color(0xfff2f2f3),
+          fillColor: const Color(0xfff2f2f3),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
             borderSide: BorderSide.none,

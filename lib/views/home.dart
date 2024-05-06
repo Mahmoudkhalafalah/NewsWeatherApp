@@ -1,11 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:news_weather_app_project/auth.dart';
 import 'package:news_weather_app_project/models/article_model.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
-import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/news_home_views.dart';
 import 'package:news_weather_app_project/views/profile_view.dart';
@@ -14,6 +10,8 @@ import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -24,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     int selectedIndex = Provider.of<AppProvider>(context).selectedIndex;
     return Scaffold(
       appBar: AppBar(
-        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        title: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             'Breeze Brief',
             style: TextStyle(
@@ -36,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         ]),
 
         elevation: 8, // Add elevation for material design effect
-        backgroundColor: Color(0xFF4F598A), // Set background color
+        backgroundColor: const Color(0xFF4F598A), // Set background color
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -55,9 +53,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _getPage(selectedIndex),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Color(0xFF323A69),
+        backgroundColor: const Color(0xFF323A69),
         style: TabStyle.react, // Assuming you want the react style
-        items: [
+        items: const [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.cloud, title: 'Weather'),
           TabItem(icon: Icons.new_releases, title: 'News'),
@@ -75,20 +73,22 @@ class _HomePageState extends State<HomePage> {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return HomeContent();
+        return const HomeContent();
       case 1:
-        return WeatherHomeDetails();
+        return const WeatherHomeDetails();
       case 2:
-        return NewsHomeView();
+        return const NewsHomeView();
       case 3:
-        return ProfileWidget(); // Assuming you have a ProfileWidget for the 'Profile' tab
+        return const ProfileWidget(); // Assuming you have a ProfileWidget for the 'Profile' tab
       default:
-        return Center(child: Text('No page found!'));
+        return const Center(child: Text('No page found!'));
     }
   }
 }
 
 class HomeContent extends StatefulWidget {
+  const HomeContent({super.key});
+
   @override
   _HomeContentState createState() => _HomeContentState();
 }
@@ -187,7 +187,7 @@ class _HomeContentState extends State<HomeContent> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox(
                 height: height - 200, // Adjust the height of the list view
                 child: ListView(
@@ -210,7 +210,7 @@ class _HomeContentState extends State<HomeContent> {
                             ListTile(
                               title: Text(
                                 article.title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ),

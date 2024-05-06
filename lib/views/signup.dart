@@ -1,12 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_weather_app_project/services/auth_service.dart';
-import 'package:news_weather_app_project/views/login.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
 import '../widgets/input_text_field.dart';
-import 'home.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -56,18 +52,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Provider.of<AppProvider>(context).signUpPassWordVisible;
     Icon passIcon = Provider.of<AppProvider>(context).signUpPasswordFieldIcon;
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: const Color(0xffffffff),
       body: Align(
         alignment: Alignment.center,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 50, 16, 16),
+          padding: const EdgeInsets.fromLTRB(16, 50, 16, 16),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.center,
                   child: Text(
                     "BreezeBrief",
@@ -107,15 +103,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: GestureDetector(
                     onTap: signUp,
                     child: Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                          color: Color(0xFF535D98),
+                          color: const Color(0xFF535D98),
                           borderRadius: BorderRadius.circular(16)),
-                      child: Center(
+                      height: 55,
+                      child: const Center(
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
@@ -125,14 +122,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-                      height: 55,
                     ),
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "already have an account?",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -141,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     GestureDetector(
                       onTap: openSignInScreen,
-                      child: Text(
+                      child: const Text(
                         ' Sign in',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,

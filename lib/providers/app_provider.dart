@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/models/article_model.dart';
 import 'package:news_weather_app_project/models/weather_forecast_model.dart';
-import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:news_weather_app_project/services/news_service.dart';
 import 'package:news_weather_app_project/services/weather_service.dart';
 
@@ -23,12 +20,19 @@ class AppProvider extends ChangeNotifier {
 
   int _selectedIndex = 0;
 
-  Icon loginPasswordFieldIcon = Icon(Icons.remove_red_eye_rounded);
+  Icon loginPasswordFieldIcon = const Icon(Icons.remove_red_eye_rounded);
   bool loginPassWordVisible = true;
 
-  Icon signUpPasswordFieldIcon = Icon(Icons.remove_red_eye_rounded);
+  Icon signUpPasswordFieldIcon = const Icon(Icons.remove_red_eye_rounded);
   bool signUpPassWordVisible = true;
 
+  bool _signInAnonymous = false;
+  set signInAnonymous(bool value) {
+    _signInAnonymous = value;
+    notifyListeners();
+  }
+
+  bool get signInAnonymous => _signInAnonymous;
   set selectedIndex(int index) {
     _selectedIndex = index;
     notifyListeners();
@@ -58,16 +62,16 @@ class AppProvider extends ChangeNotifier {
   void changeLoginPassVisibility() {
     loginPassWordVisible = !loginPassWordVisible;
     loginPasswordFieldIcon = (loginPassWordVisible)
-        ? Icon(Icons.remove_red_eye_rounded)
-        : Icon(Icons.remove_red_eye_outlined);
+        ? const Icon(Icons.remove_red_eye_rounded)
+        : const Icon(Icons.remove_red_eye_outlined);
     notifyListeners();
   }
 
   void changeSignUpPassVisibility() {
     signUpPassWordVisible = !signUpPassWordVisible;
     signUpPasswordFieldIcon = (signUpPassWordVisible)
-        ? Icon(Icons.remove_red_eye_rounded)
-        : Icon(Icons.remove_red_eye_outlined);
+        ? const Icon(Icons.remove_red_eye_rounded)
+        : const Icon(Icons.remove_red_eye_outlined);
     notifyListeners();
   }
 }
