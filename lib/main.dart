@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news_weather_app_project/providers/app_provider.dart';
+import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/home.dart';
 import 'package:news_weather_app_project/views/login.dart';
 import 'package:news_weather_app_project/views/signup.dart';

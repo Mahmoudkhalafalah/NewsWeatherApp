@@ -1,18 +1,17 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:news_weather_app_project/auth.dart';
 import 'package:news_weather_app_project/models/article_model.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
-import 'package:news_weather_app_project/services/news_service.dart';
-import 'package:news_weather_app_project/services/weather_service.dart';
+import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:news_weather_app_project/views/Weather_home_default_view.dart';
 import 'package:news_weather_app_project/views/news_home_views.dart';
+import 'package:news_weather_app_project/views/profile_view.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/app_provider.dart';
-
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,15 +33,6 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
                 fontFamily: 'Open Sans'),
           ),
-          IconButton(
-            icon: Icon(
-              Icons.output,
-            ),
-            color: Colors.white,
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-          )
         ]),
 
         elevation: 8, // Add elevation for material design effect
@@ -75,9 +65,8 @@ class _HomePageState extends State<HomePage> {
         ],
         initialActiveIndex: selectedIndex,
         onTap: (int index) {
-          setState(() {
-            Provider.of<AppProvider>(context,listen: false).selectedIndex =  index;
-          });
+          Provider.of<AppProvider>(context, listen: false).selectedIndex =
+              index;
         },
       ),
     );
@@ -109,25 +98,14 @@ class _HomeContentState extends State<HomeContent> {
   WeatherModel? weatherBrief;
 
   @override
-  void initState() {
-    super.initState();
-    Dio dio = Dio();
-    WeatherService weatherService = WeatherService(dio);
-    weatherService.getWeatherDataWithLocation().then((value) => {
-          setState(() {
-            weatherBrief = value;
-          })
-        });
-    NewsService(dio).getTopHeadlines(category: "general").then((value) => {
-          setState(() {
-            newsList = value;
-          })
-        });
-  }
-
-  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+
+    Provider.of<AppProvider>(context, listen: false).setWeatherData();
+    weatherBrief = Provider.of<AppProvider>(context).weatherData;
+    Provider.of<AppProvider>(context, listen: false).getGeneralNews();
+    newsList = Provider.of<AppProvider>(context).generalArticles;
+
     if (weatherBrief == null || newsList == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
@@ -149,7 +127,7 @@ class _HomeContentState extends State<HomeContent> {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
-            children:[
+            children: [
               Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Row(
@@ -222,8 +200,7 @@ class _HomeContentState extends State<HomeContent> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
-                            if (article.image != null )
+                            if (article.image != null)
                               Image.network(
                                 '${article.image}',
                                 width: double.infinity,
@@ -254,15 +231,6 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ProfileWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Profile Widget', style: TextStyle(fontSize: 24.0)),
     );
   }
 }

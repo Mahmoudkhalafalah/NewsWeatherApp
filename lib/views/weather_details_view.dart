@@ -42,11 +42,8 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return HomePage();
-                          },
-                        ));
+                        Navigator.of(context)
+                            .pushReplacementNamed("homeScreen");
                       },
                       icon: Icon(
                         Icons.arrow_back,

@@ -15,7 +15,7 @@ class NewsTitleForCarousel extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
             articleModel.image ??
-                "https://www.digitalmesh.com/blog/wp-content/uploads/2020/05/404-error.jpg",
+                "https://th.bing.com/th/id/OIP.aV3_1sg9QEdADlu5byNWbwAAAA?w=222&h=180&c=7&r=0&o=5&pid=1.7",
             fit: BoxFit.cover,
           ),
         ),

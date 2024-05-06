@@ -1,15 +1,15 @@
-import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/views/news_search_view.dart';
-import '../services/news_service.dart';
+import 'package:provider/provider.dart';
+import '../providers/app_provider.dart';
 import '../widgets/categories_list_view.dart';
 import '../widgets/newsTitleForCarusal.dart';
 import '../widgets/news_list_view_builder.dart';
 
 class NewsHomeView extends StatefulWidget {
+  const NewsHomeView({super.key});
+
   @override
   State<NewsHomeView> createState() => _NewsHomeViewState();
 }
@@ -17,14 +17,10 @@ class NewsHomeView extends StatefulWidget {
 class _NewsHomeViewState extends State<NewsHomeView> {
   var articles;
 
-  void show() async {
-    articles = await NewsService(Dio()).getTopHeadlines(category: "technology");
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
-    show();
+    Provider.of<AppProvider>(context, listen: false).getGeneralNews();
+    articles = Provider.of<AppProvider>(context).generalArticles;
     if (articles == null) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
@@ -79,7 +75,9 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                       Text(
                         "Breaking News",
                         style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 19),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 19,
+                            color: Colors.white),
                       ),
                     ],
                   ),
@@ -122,7 +120,7 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                 ),
               ),
               NewsListViewBuilder(
-                category: 'general',
+                category: 'technology',
               ),
               SliverToBoxAdapter(
                 child: SizedBox(

@@ -46,11 +46,9 @@ class _search_viewState extends State<search_view> {
             title: TextField(
               controller: controller,
               decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.white),
-                border: InputBorder.none
-              ),
-
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: InputBorder.none),
               style: TextStyle(color: Colors.white),
               onChanged: (v) {
                 setState(() {

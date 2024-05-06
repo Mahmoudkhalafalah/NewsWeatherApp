@@ -2,7 +2,11 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:news_weather_app_project/providers/app_provider.dart';
+import 'package:news_weather_app_project/services/auth_service.dart';
+import 'package:news_weather_app_project/widgets/input_text_field.dart';
+import 'package:provider/provider.dart';
 import 'package:news_weather_app_project/views/signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,11 +19,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
+    AuthService().signInWithEmailAndPassword(
+        _emailController.text.trim().toLowerCase(),
+        _passwordController.text.trim());
     Navigator.of(context).pushReplacementNamed("/");
   }
 
@@ -40,6 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool passVisibility =
+        Provider.of<AppProvider>(context).loginPassWordVisible;
+    Icon passIcon = Provider.of<AppProvider>(context).loginPasswordFieldIcon;
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       body: Align(
@@ -66,59 +73,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 16),
-                  child: TextField(
-                    controller:
-                        _emailController, // Use the right controller to manage the input
-                    obscureText: false,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      hintStyle: TextStyle(
-                        color: Color(0xff9f9d9d),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xfff2f2f3),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                CustomTextField(
+                  controller: _emailController,
+                  visibility: false,
+                  hint: "Email address",
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                  child: TextField(
-                    controller:
-                        _passwordController, // Use the right controller to manage the input
-                    obscureText: true,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      hintStyle: TextStyle(
-                        color: Color(0xff9f9d9d),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xfff2f2f3),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                PasswordCustomTextField(
+                  controller: _passwordController,
+                  hint: "password",
+                  visibility: passVisibility,
+                  icon: passIcon,
+                  onPress: () {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .changeLoginPassVisibility();
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
@@ -164,6 +132,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return PasswordReset();
+                            });
+                      },
+                      child: Text(
+                        ' Forgot password?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff323A6B),
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
@@ -173,3 +165,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+

@@ -19,14 +19,15 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
   WeatherModel? weatherDataWithLocation;
   List<WeatherForecastModel>? weatherDataListWithLocation;
   @override
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    Provider.of<AppProvider>(context).setWeatherData();
+
+    Provider.of<AppProvider>(context, listen: false).setWeatherData();
 
     weatherDataWithLocation = Provider.of<AppProvider>(context).weatherData;
-    weatherDataListWithLocation = Provider.of<AppProvider>(context).weatherDataList;
+    weatherDataListWithLocation =
+        Provider.of<AppProvider>(context).weatherDataList;
     if (weatherDataListWithLocation == null ||
         weatherDataWithLocation == null) {
       return const Scaffold(
@@ -389,7 +390,9 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 16,)
+                  SizedBox(
+                    height: 16,
+                  )
                 ],
               ),
             ),

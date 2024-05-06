@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:news_weather_app_project/views/login.dart';
+import 'package:provider/provider.dart';
+import '../providers/app_provider.dart';
+import '../widgets/input_text_field.dart';
 import 'home.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -17,13 +22,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController();
 
   Future signUp() async {
-    if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      Navigator.of(context).pushReplacementNamed("loginScreen");
-    }
+    AuthService().signUp(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+        _confirmPasswordController.text.trim());
+    Navigator.of(context).pushReplacementNamed("loginScreen");
   }
 
   bool passwordConfirmed() {
@@ -36,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void openSignInScreen() {
-    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacementNamed("loginScreen");
   }
 
   @override
@@ -49,6 +52,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool passVisibility =
+        Provider.of<AppProvider>(context).signUpPassWordVisible;
+    Icon passIcon = Provider.of<AppProvider>(context).signUpPasswordFieldIcon;
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       body: Align(
@@ -75,86 +81,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 16),
-                  child: TextField(
-                    controller:
-                        _emailController, // Use the right controller to manage the input
-                    obscureText: false,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      hintStyle: TextStyle(
-                        color: Color(0xff9f9d9d),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xfff2f2f3),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                CustomTextField(
+                  controller: _emailController,
+                  visibility: false,
+                  hint: "Email address",
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                  child: TextField(
-                    controller:
-                        _passwordController, // Use the right controller to manage the input
-                    obscureText: true,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      hintStyle: TextStyle(
-                        color: Color(0xff9f9d9d),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xfff2f2f3),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                PasswordCustomTextField(
+                  controller: _passwordController,
+                  hint: "Password",
+                  visibility: passVisibility,
+                  icon: passIcon,
+                  onPress: () {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .changeSignUpPassVisibility();
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                  child: TextField(
-                    controller:
-                        _confirmPasswordController, // Use the right controller to manage the input
-                    obscureText: true,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Confirm Password",
-                      hintStyle: TextStyle(
-                        color: Color(0xff9f9d9d),
-                      ),
-                      filled: true,
-                      fillColor: Color(0xfff2f2f3),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                PasswordCustomTextField(
+                  controller: _confirmPasswordController,
+                  hint: "Confirm password",
+                  visibility: passVisibility,
+                  icon: passIcon,
+                  onPress: () {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .changeSignUpPassVisibility();
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
