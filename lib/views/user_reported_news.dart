@@ -115,7 +115,7 @@ class GetData extends StatelessWidget {
                     ),
                     ListTile(
                       title: Text(
-                        '${data['title']} ,${data['imgURL']} ',
+                        data['title'],
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,

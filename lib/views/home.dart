@@ -138,7 +138,7 @@ class _HomeContentState extends State<HomeContent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${(weatherBrief?.cityName ?? "N/A").substring(0,20)}',
+                          '${(weatherBrief?.cityName ?? "N/A")}',
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                             fontSize: 40,
