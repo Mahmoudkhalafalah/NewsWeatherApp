@@ -108,7 +108,7 @@ class GetData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.network(
-                      '${(data['imgURL'].toString().isEmpty) ? data['imgURL'] : "https://th.bing.com/th/id/OIP.aV3_1sg9QEdADlu5byNWbwAAAA?w=222&h=180&c=7&r=0&o=5&pid=1.7"}',
+                      '${data['imgURL']}',
                       width: double.infinity,
                       height: 200,
                       fit: BoxFit.cover,
