@@ -102,6 +102,7 @@ flutter:
     - assets/Science.PNG
     - assets/sport.PNG
     - assets/technology.PNG
+    - assets/app_logo_V4.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

@@ -76,6 +76,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      'assets/app_logo_V4.png',
+                      scale: 8,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8,),
                 const Align(
                   alignment: Alignment.center,
                   child: Text(

@@ -6,9 +6,11 @@ class NewsService {
   NewsService(this.dio);
 
   Future<List<ArticleModel>> getTopHeadlines({required String category}) async {
-    //String apiKey = '87fb912cdc604190810d02db01eb8cf8';
+    String apiKey = '87fb912cdc604190810d02db01eb8cf8';
     //String apiKey = 'b8731439d34140c6bffc03c115ad374c';
-    String apiKey = 'ffce7d3fdcde415eb068b32418f51d6d';
+    //String apiKey = 'ffce7d3fdcde415eb068b32418f51d6d';
+    //String apiKey = 'fe9eacbc42bc4c3d8f65f489eccbe2bb'
+    //String apiKey = 'de5595d0286c4671afb0459d91efb51e';
     try {
       var response = await dio.get(
           'https://newsapi.org/v2/top-headlines?country=us&apiKey=$apiKey&category=$category');
