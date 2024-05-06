@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_weather_app_project/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
@@ -13,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
@@ -22,6 +26,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
         _confirmPasswordController.text.trim());
+    try{
+      FirebaseFirestore.instance.collection('users').add({
+        'Name' : _nameController.text.trim(),
+        'Email' : _emailController.text.trim()
+      });
+    }
+    on Exception catch(e){
+      Fluttertoast.showToast(msg: e.toString());
+    }
     Navigator.of(context).pushReplacementNamed("loginScreen");
   }
 
@@ -76,6 +89,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: Color(0xFF535D98),
                     ),
                   ),
+                ),
+                CustomTextField(
+                  controller: _nameController,
+                  visibility: false,
+                  hint: "Full Name",
                 ),
                 CustomTextField(
                   controller: _emailController,
