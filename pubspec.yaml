@@ -54,6 +54,7 @@ dependencies:
   cloud_firestore: ^4.17.2
   image_picker: ^1.1.1
   firebase_storage: ^11.7.4
+  flutter_swipe_detector: ^2.0.0
 
 
 dev_dependencies:
@@ -90,6 +91,7 @@ flutter:
     - assets/first_q.png
     - assets/full.png
     - assets/last_q.png
+    - assets/first_q.png
     - assets/New.png
     - assets/waning_cresent.png
     - assets/waning_gibbous.png
