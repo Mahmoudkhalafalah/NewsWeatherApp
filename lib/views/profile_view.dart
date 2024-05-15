@@ -17,11 +17,11 @@ class ProfileWidget extends StatelessWidget {
         child: FloatingActionButton(
           elevation: 8,
           onPressed: () {
-            Provider.of<AppProvider>(context, listen: false).selectedIndex =
-            0;
             if (!signIn) {
               AuthService().signOut();
             } else {
+              Provider.of<AppProvider>(context, listen: false).selectedIndex =
+                  0;
               Navigator.of(context).pushReplacementNamed("loginScreen");
             }
           },

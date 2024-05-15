@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 
 class UserNews extends StatefulWidget {
   const UserNews({super.key});
@@ -97,53 +96,42 @@ class GetData extends StatelessWidget {
     return FutureBuilder(
         future: news.doc(docID).get(),
         builder: ((context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done && snapshot.data?.data() != null) {
+          if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            return SwipeDetector(
-              onSwipeRight: (offset) async{
-                showDialog(context: context, builder: (context){
-                  return Center(child: CircularProgressIndicator(),);
-                });
-                await news.doc(docID).delete();
-                news = await FirebaseFirestore.instance.collection('news');
-
-                Navigator.of(context).pop();
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  elevation: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.network(
-                        '${data['imgURL']}',
-                        width: double.infinity,
-                        height: 200,
-                        fit: BoxFit.cover,
-                      ),
-                      ListTile(
-                        title: Text(
-                          data['title'],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.network(
+                      '${data['imgURL']}',
+                      width: double.infinity,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    ListTile(
+                      title: Text(
+                        data['title'],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
-                        subtitle: Text(data['desc'] ?? ''),
-                        onTap: () {
-                          // Open article URL
-                        },
                       ),
-                    ],
-                  ),
+                      subtitle: Text(data['desc'] ?? ''),
+                      onTap: () {
+                        // Open article URL
+                      },
+                    ),
+                  ],
                 ),
               ),
             );
             ;
           } else
-            return Container();
+            return Text('loading');
         }));
   }
 }

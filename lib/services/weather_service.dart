@@ -50,23 +50,8 @@ class WeatherService {
 
   Future<List<WeatherForecastModel>>
       getForecastWeatherDataWithLocation() async {
-    Position pos = await LocationService().determinePosition();
-    try {
-      Response response = await dio
-          .get('$baseUrl/forecast.json?key=$apiKey&q=${pos.latitude},${pos.longitude}&days=7');
-
-      for (int i = 0; i < 7; i++) {
-        weatherForecastModel[i] =
-            WeatherForecastModel.fromJson(response.data, i);
-      }
-      return weatherForecastModel;
-    } on DioException catch (e) {
-      final errMsg = e.response?.data['error']['message'] ?? ', Try Later';
-      throw Exception(errMsg);
-    } catch (e) {
-      log(e.toString());
-      throw Exception('Error, Try Later');
-    }
+    String cityName = await LocationService().getCityName();
+    return getForecastWeatherData(cityName: cityName);
   }
 
   Future<List<WeatherForecastModel>> getForecastWeatherData(

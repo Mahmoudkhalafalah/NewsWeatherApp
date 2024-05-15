@@ -154,7 +154,7 @@ List getAirQuality(double value) {
 
 String getMoonImage(String value) {
   String moonImage = " ";
-  if (value == 'New Moon') {
+  if (value == 'New') {
     moonImage = 'assets/New.png';
   } else if (value == 'Full') {
     moonImage = 'assets/full.png';
@@ -169,7 +169,7 @@ String getMoonImage(String value) {
   } else if (value == 'Last Quarter') {
     moonImage = 'assets/last_q.png';
   } else {
-    moonImage = 'assets/first_q.png';
+    moonImage = 'assets/first_q';
   }
   return moonImage;
 }
