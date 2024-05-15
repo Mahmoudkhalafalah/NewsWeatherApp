@@ -96,7 +96,7 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-
+    double width = MediaQuery.of(context).size.width;
     Provider.of<AppProvider>(context, listen: false).setWeatherData();
     weatherBrief = Provider.of<AppProvider>(context).weatherData;
     Provider.of<AppProvider>(context, listen: false).getGeneralNews();
@@ -132,12 +132,16 @@ class _HomeContentState extends State<HomeContent> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '${(weatherBrief?.cityName ?? "N/A")}',
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            fontSize: 40,
-                            color: Colors.white,
+                        SizedBox(
+                          width: 0.6*width,
+                          child: Text(
+                            maxLines: 2,
+                            '${(weatherBrief?.cityName ?? "N/A")}',
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         const SizedBox(

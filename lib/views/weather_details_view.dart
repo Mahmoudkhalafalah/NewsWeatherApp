@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_weather_app_project/models/weather_model.dart';
+import 'package:news_weather_app_project/views/home.dart';
 import 'package:news_weather_app_project/views/weather_search_view.dart';
 import 'package:news_weather_app_project/widgets/weather_widgets.dart';
 
@@ -39,8 +40,12 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed("homeScreen");
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return HomePage();
+                        }), (r) {
+                          return false;
+                        });
                       },
                       icon: const Icon(
                         Icons.arrow_back,
@@ -68,12 +73,16 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          weatherDetails.cityName,
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            fontSize: 40,
-                            color: Colors.white,
+                        SizedBox(
+                          width: 0.6 * width,
+                          child: Text(
+                            maxLines: 2,
+                            weatherDetails.cityName,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -171,7 +180,7 @@ class WeatherDetailsWithSearch extends StatelessWidget {
                             SizedBox(
                               width: 0.6 * width,
                               child: LinearProgressIndicator(
-                                value: ((weatherDetails.airQuality!)),
+                                value: ((weatherDetails.airQuality!)) / 30,
                                 color: getAirQuality(
                                     weatherDetails.airQuality!)[1],
                                 backgroundColor: const Color(0xffB0AEAE),

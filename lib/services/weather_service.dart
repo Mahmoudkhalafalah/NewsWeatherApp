@@ -9,7 +9,7 @@ import '../models/weather_model.dart';
 
 class WeatherService {
   final baseUrl = 'http://api.weatherapi.com/v1';
-  final apiKey = '2f8decbf816447469f8142742242404';
+  final apiKey = 'c97b47f48c1e4012b2d34239241505';
   final Dio dio;
   List<WeatherForecastModel> weatherForecastModel =
       List<WeatherForecastModel>.filled(
@@ -50,8 +50,23 @@ class WeatherService {
 
   Future<List<WeatherForecastModel>>
       getForecastWeatherDataWithLocation() async {
-    String cityName = await LocationService().getCityName();
-    return getForecastWeatherData(cityName: cityName);
+    Position pos = await LocationService().determinePosition();
+    try {
+      Response response = await dio.get(
+          '$baseUrl/forecast.json?key=$apiKey&q=${pos.latitude},${pos.longitude}&days= 7&aqi=yes');
+
+      for (int i = 0; i < 7; i++) {
+        weatherForecastModel[i] =
+            WeatherForecastModel.fromJson(response.data, i);
+      }
+      return weatherForecastModel;
+    } on DioException catch (e) {
+      final errMsg = e.response?.data['error']['message'] ?? ', Try Later';
+      throw Exception(errMsg);
+    } catch (e) {
+      log(e.toString());
+      throw Exception('Error, Try Later');
+    }
   }
 
   Future<List<WeatherForecastModel>> getForecastWeatherData(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:news_weather_app_project/views/login.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/app_provider.dart';
@@ -19,11 +20,15 @@ class ProfileWidget extends StatelessWidget {
           onPressed: () {
             if (!signIn) {
               AuthService().signOut();
-            } else {
-              Provider.of<AppProvider>(context, listen: false).selectedIndex =
-                  0;
-              Navigator.of(context).pushReplacementNamed("loginScreen");
             }
+            Provider.of<AppProvider>(context, listen: false).selectedIndex =
+            0;
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return LoginScreen();
+                }), (r) {
+                  return false;
+                });
           },
           backgroundColor: const Color(0xFF323A69),
           child: const Icon(Icons.output_rounded),

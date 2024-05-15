@@ -169,7 +169,7 @@ String getMoonImage(String value) {
   } else if (value == 'Last Quarter') {
     moonImage = 'assets/last_q.png';
   } else {
-    moonImage = 'assets/first_q';
+    moonImage = 'assets/first_q.png';
   }
   return moonImage;
 }

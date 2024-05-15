@@ -17,7 +17,6 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
   WeatherModel? weatherDataWithLocation;
   List<WeatherForecastModel>? weatherDataListWithLocation;
   @override
-  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
@@ -55,23 +54,26 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) {
-                              return const SearchView();
-                            },
-                          ));
-                        },
-                        icon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
+                  SizedBox(
+                    height: 16,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const SearchView();
+                              },
+                            ));
+                          },
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,12 +81,16 @@ class _WeatherHomeDetailsState extends State<WeatherHomeDetails> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            weatherDataWithLocation?.cityName ?? "N/A",
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                              fontSize: 40,
-                              color: Colors.white,
+                          SizedBox(
+                            width: 0.6 * width,
+                            child: Text(
+                              maxLines: 2,
+                              weatherDataWithLocation?.cityName ?? "N/A",
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                fontSize: 40,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const SizedBox(
